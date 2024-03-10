@@ -1,5 +1,5 @@
 package co.edu.uniquindio.UniLocal.Test;
-import co.edu.uniquindio.UniLocal.modelo.Cliente;
+import co.edu.uniquindio.UniLocal.documentos.Cliente;
 import co.edu.uniquindio.UniLocal.repositorio.ClienteRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 
@@ -31,9 +32,14 @@ public class ClienteTest {
 
     @Test
     public void actualizarClienteTest() {
-        //Obtenemos el cliente con el id XXXXXXX
-        Cliente cliente = clienteRepo.findById("65dbbdcddd1cf204ef2b4008").orElseThrow();
         //Modificar el email del cliente
+
+        Optional<Cliente> clienteOptional = clienteRepo.findById("65dbbdcddd1cf204ef2b4008");
+        if(clienteOptional.isEmpty()){
+            throw new RuntimeException("El id dado no existe");
+        }
+
+        Cliente cliente = clienteOptional.get();
 
         cliente.setEmail("nuevoemail@email.com");
         //Guardamos el cliente

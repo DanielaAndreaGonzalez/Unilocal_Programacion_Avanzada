@@ -1,4 +1,4 @@
-package co.edu.uniquindio.UniLocal.modelo;
+package co.edu.uniquindio.UniLocal.documentos;
 
 import lombok.Getter;
 import lombok.Setter;
