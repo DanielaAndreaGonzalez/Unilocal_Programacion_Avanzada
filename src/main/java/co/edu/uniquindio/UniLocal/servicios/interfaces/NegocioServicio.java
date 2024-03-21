@@ -1,13 +1,17 @@
 package co.edu.uniquindio.UniLocal.servicios.interfaces;
 
+import co.edu.uniquindio.UniLocal.dto.ActualizarNegocioDTO;
+import co.edu.uniquindio.UniLocal.dto.RegistroNegocioDTO;
+import co.edu.uniquindio.UniLocal.excepciones.ResourceNotFoundException;
+
 public interface NegocioServicio{
+    String crearNegocio(RegistroNegocioDTO registroNegocioDTO) throws Exception;
 
-   // void crearNegocio(RegistroNegocioDTO negocioDTO);
 
-     void crearNegocio();
-    void actualizarNegocio();
+    void actualizarNegocio(ActualizarNegocioDTO actualizarNegocioDTO) throws Exception;
 
-    void eliminarNegocio(String idNegocio);
+
+    void eliminarNegocio(String idNegocio) throws Exception;
 
     void obtenerNegocio();
 
