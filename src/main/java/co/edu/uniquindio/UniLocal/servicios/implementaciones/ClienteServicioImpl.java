@@ -32,17 +32,19 @@ public class ClienteServicioImpl implements ClienteServicio {
             throw new Exception("El correo ya se encuentra registrado");
         }
 
-        Cliente cliente = Cliente
-                .builder()
-                .nombre(registroUsuarioDTO.nombre())
-                .nickname(registroUsuarioDTO.nickname())
-                .email(registroUsuarioDTO.email())
-                .ciudad(registroUsuarioDTO.ciudadResidencia())
-                .fotoPerfil(registroUsuarioDTO.fotoPerfil())
-                .build();
-    //Se guarda en la base de datos y obtenemos el objeto registrado
+        //Se crea el objeto Cliente
+        Cliente cliente = new Cliente();
+//Se le asignan sus campos
+        cliente.setNombre( registroUsuarioDTO.nombre() );
+        cliente.setNickname( registroUsuarioDTO.nickname() );
+        cliente.setCiudad( registroUsuarioDTO.ciudadResidencia() );
+        cliente.setFotoPerfil( registroUsuarioDTO.fotoPerfil() );
+        cliente.setEmail( registroUsuarioDTO.email() );
+        cliente.setPassword( registroUsuarioDTO.password() );
+        cliente.setEstado(EstadoRegistro.ACTIVO);
+//Se guarda en la base de datos y obtenemos el objeto registrado
         Cliente clienteGuardado = clienteRepo.save(cliente);
-    //Retornamos el id (código) del cliente registrado
+//Retornamos el id (código) del cliente registrado
         return clienteGuardado.getCodigo();
     }
 
