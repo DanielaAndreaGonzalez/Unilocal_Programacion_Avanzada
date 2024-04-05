@@ -7,12 +7,14 @@ import co.edu.uniquindio.UniLocal.documentos.Cliente;
 import co.edu.uniquindio.UniLocal.repositorio.ClienteRepo;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ClienteServicio;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ClienteServicioImpl implements ClienteServicio {
 
 
@@ -48,20 +50,16 @@ public class ClienteServicioImpl implements ClienteServicio {
         return clienteGuardado.getCodigo();
     }
 
-    @Override
-    public void actualizarCliente(ActualizacionUsuarioDTO actualizacionUsuarioDTO) throws ResourceNotFoundException {
+    public void actualizarCliente(ActualizarClienteDTO actualizarClienteDTO) throws ResourceNotFoundException {
 
-        Cliente cliente =  obtenerClientePorIdCuenta(actualizacionUsuarioDTO.id());
-        cliente.setFotoPerfil(actualizacionUsuarioDTO.fotoPerfil());
-        cliente.setCiudad(actualizacionUsuarioDTO.ciudadResidencia());
-        cliente.setEmail(actualizacionUsuarioDTO.email());
-        cliente.setNombre(actualizacionUsuarioDTO.nombre());
+        Cliente cliente =  obtenerClientePorIdCuenta(actualizarClienteDTO.id());
 
-        //Como el objeto cliente ya tiene un id, el save() no crea un nuevo registro sino
-        //que actualiza el que ya existe
+        cliente.setNombre( actualizarClienteDTO.nombre() );
+        cliente.setFotoPerfil( actualizarClienteDTO.fotoPerfil() );
+        cliente.setCiudad( actualizarClienteDTO.ciudadResidencia() );
+        cliente.setEmail( actualizarClienteDTO.email() );
         clienteRepo.save(cliente);
     }
-
     @Override
     public void eliminarCliente(String idCuenta)throws ResourceNotFoundException {
         //Obtenemos el cliente que se quiere eliminar y le asignamos el estado
@@ -70,7 +68,6 @@ public class ClienteServicioImpl implements ClienteServicio {
         cliente.setEstado(EstadoRegistro.INACTIVO);
         clienteRepo.save(cliente);
     }
-
 
     @Override
     public DetalleClienteDTO obtenerCliente(String idCuenta) throws ResourceNotFoundException {
@@ -81,7 +78,7 @@ public class ClienteServicioImpl implements ClienteServicio {
                                     cliente.getNombre(),
                                     cliente.getFotoPerfil(),
                                     cliente.getNickname(),
-                                    cliente.getNickname(),
+                                    cliente.getEmail(),
                                     cliente.getCiudad()
         );
     }
@@ -91,7 +88,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         //Creamos una lista de DTO's de clientes
         List<ItemClienteDTO> items = new ArrayList<>();
 
-        for(Cliente cliente: clientes){
+       /* for(Cliente cliente: clientes){
             items.add(new ItemClienteDTO(
                      cliente.getCodigo(),
                      cliente.getNombre(),
@@ -99,7 +96,18 @@ public class ClienteServicioImpl implements ClienteServicio {
                     cliente.getNickname(),
                     cliente.getCiudad()
             ));
-        }
+        }*/
+
+        clientes.forEach(cliente -> {
+            items.add(new ItemClienteDTO(
+                    cliente.getCodigo(),
+                    cliente.getNombre(),
+                    cliente.getFotoPerfil(),
+                    cliente.getNickname(),
+                    cliente.getCiudad()
+            ));
+        });
+
         return items;
     }
 
