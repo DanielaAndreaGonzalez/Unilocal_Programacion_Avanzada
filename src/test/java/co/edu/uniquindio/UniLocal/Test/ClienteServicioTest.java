@@ -1,7 +1,6 @@
 package co.edu.uniquindio.UniLocal.Test;
 
-import co.edu.uniquindio.UniLocal.dto.EmailDTO;
-import co.edu.uniquindio.UniLocal.dto.RegistroUsuarioDTO;
+import co.edu.uniquindio.UniLocal.dto.*;
 import co.edu.uniquindio.UniLocal.servicios.implementaciones.EmailServicioImpl;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ClienteServicio;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.EmailServicio;
@@ -9,6 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 public class ClienteServicioTest {
@@ -43,6 +44,40 @@ public class ClienteServicioTest {
 //Se registra el cliente
         String codigo = clienteServicio.registrarsCliente(registroClienteDTO);
         Assertions.assertNotNull(codigo);
+    }
+
+    @Test
+    public void actualizarTest() throws Exception{
+//Se crea un objeto de tipo ActualizarClienteDTO
+        ActualizarClienteDTO actualizarClienteDTO = new ActualizarClienteDTO(
+                "Cliente1",
+                "Juan",
+                "nueva foto",
+                "juan@email.com",
+                "Armenia"
+        );
+//Se actualiza el cliente
+        clienteServicio.actualizarCliente(actualizarClienteDTO);
+//Con el método obtenerCliente se obtiene el cliente con el id "Cliente1"
+        DetalleClienteDTO detalleClienteDTO = clienteServicio.obtenerCliente("Cliente1");
+//Se verifica que la foto de perfil sea la misma que se actualizó
+        Assertions.assertEquals("nueva foto", detalleClienteDTO.fotoPerfil());
+    }
+
+    @Test
+    public void eliminarTest() throws Exception{
+//Se elimina el cliente con el id "Cliente1"
+        clienteServicio.eliminarCliente("Cliente1");
+//Al intentar obtener el cliente con el id "Cliente1" se debe lanzar una excepción
+        Assertions.assertThrows(Exception.class, () -> clienteServicio.obtenerCliente("Cliente1") );
+    }
+
+    @Test
+    public void listarClientes(){
+//Se obtiene la lista de clientes
+        List<ItemClienteDTO> lista = clienteServicio.listarClientes();
+//Se verifica que la lista no sea nula y que tenga 3 elementos
+        Assertions.assertEquals(3, lista.size());
     }
 
 
