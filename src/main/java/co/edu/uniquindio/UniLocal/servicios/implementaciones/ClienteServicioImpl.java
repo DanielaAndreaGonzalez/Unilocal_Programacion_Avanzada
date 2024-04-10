@@ -6,6 +6,7 @@ import co.edu.uniquindio.UniLocal.excepciones.ResourceNotFoundException;
 import co.edu.uniquindio.UniLocal.documentos.Cliente;
 import co.edu.uniquindio.UniLocal.repositorio.ClienteRepo;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ClienteServicio;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +43,11 @@ public class ClienteServicioImpl implements ClienteServicio {
         cliente.setCiudad( registroUsuarioDTO.ciudadResidencia() );
         cliente.setFotoPerfil( registroUsuarioDTO.fotoPerfil() );
         cliente.setEmail( registroUsuarioDTO.email() );
-        cliente.setPassword( registroUsuarioDTO.password() );
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String passwordEncriptada = passwordEncoder.encode( registroUsuarioDTO.password() );
+
+        cliente.setPassword(passwordEncriptada);
         cliente.setEstado(EstadoRegistro.ACTIVO);
 //Se guarda en la base de datos y obtenemos el objeto registrado
         Cliente clienteGuardado = clienteRepo.save(cliente);
@@ -107,6 +112,8 @@ public class ClienteServicioImpl implements ClienteServicio {
                     cliente.getCiudad()
             ));
         });
+        
+        //items = clientes.stream().map(cliente -> new ItemClienteDTO(cliente.getCodigo(), cliente.getNombre(), cliente.getFotoPerfil(), cliente.getNickname(), cliente.getCiudad())).collect(Collectors.toList());
 
         return items;
     }

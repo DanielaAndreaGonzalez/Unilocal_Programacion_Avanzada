@@ -3,6 +3,8 @@ package co.edu.uniquindio.UniLocal.servicios.implementaciones;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ImagenesServicio;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -11,6 +13,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
+@Transactional
 public class ImagenesServicioImpl implements ImagenesServicio {
 
     private final Cloudinary cloudinary;

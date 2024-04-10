@@ -9,7 +9,7 @@ import java.util.List;
 public interface ClienteServicio extends CuentaServicio{
     String registrarsCliente(RegistroUsuarioDTO registroUsuarioDTO) throws Exception;
     void actualizarCliente(ActualizarClienteDTO actualizarClienteDTO) throws ResourceNotFoundException;
-    void eliminarCliente(String idCuenta) throws Exception;
+    void eliminarCliente(String idCuenta) throws ResourceNotFoundException;
     DetalleClienteDTO obtenerCliente(String idCuenta) throws Exception;
 
     List<ItemClienteDTO> listarClientes();

@@ -6,7 +6,7 @@ import co.edu.uniquindio.UniLocal.dto.RecuperacionPasswordDTO;
 
 public interface CuentaServicio {
 
-    void eliminarCuenta(String idCliente) throws Exception;
+    void eliminarCuenta(String codigo) throws Exception;
 
     void iniciariSesion(InicioSesionDTO InicioSesionDTO);
 

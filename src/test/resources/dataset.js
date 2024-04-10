@@ -6,7 +6,7 @@ db.clientes.insertMany([
         ciudad: 'Armenia',
         fotoPerfil: 'mi foto',
         email: 'juan@email.com',
-        password: 'mipassword',
+        password: '$2a$10$m0oHiRjF5RVqJPiBi173D.RiANPzVm57IvKgJdIgK8LIuAGwgvWuy',
         nombre: 'Juan',
         estado: 'ACTIVO',
         _class: 'co.edu.uniquindio.UniLocal.documentos.Cliente'

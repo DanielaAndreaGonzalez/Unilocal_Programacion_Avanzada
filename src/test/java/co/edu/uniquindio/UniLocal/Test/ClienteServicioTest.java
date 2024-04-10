@@ -2,12 +2,14 @@ package co.edu.uniquindio.UniLocal.Test;
 
 import co.edu.uniquindio.UniLocal.dto.*;
 import co.edu.uniquindio.UniLocal.servicios.implementaciones.EmailServicioImpl;
+import co.edu.uniquindio.UniLocal.servicios.interfaces.AutenticacionServicio;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ClienteServicio;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.EmailServicio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -20,6 +22,9 @@ public class ClienteServicioTest {
     @Autowired
     private ClienteServicio clienteServicio;
 
+    @Autowired
+    private AutenticacionServicio autenticacionServicio;
+
     @Test
     public void emailTest() throws Exception{
 
@@ -28,6 +33,16 @@ public class ClienteServicioTest {
                 "Prueba desde UniLocal ",
                 "narvaezkevin82@gmail.com"
         ));
+    }
+
+    @Test
+    public void autenticacionTest() throws Exception{
+
+        autenticacionServicio.iniciarioSesionCliente(new LoginDTO(
+                "juan@email.com",
+                "123"
+        ));
+
     }
 
     @Test
