@@ -119,8 +119,10 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public void eliminarCuenta(String idCliente) throws ResourceNotFoundException {
-
+    public void eliminarCuenta(String idCuenta) throws ResourceNotFoundException {
+        Cliente cliente = obtenerClientePorIdCuenta(idCuenta) ;
+        cliente.setEstado(EstadoRegistro.INACTIVO);
+        clienteRepo.save(cliente);
     }
     @Override
     public void iniciariSesion(InicioSesionDTO InicioSesionDTO) {
