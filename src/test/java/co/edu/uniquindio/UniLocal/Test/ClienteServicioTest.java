@@ -31,7 +31,7 @@ public class ClienteServicioTest {
         emailServicio.enviarCorreo(new EmailDTO(
                 "Prueba",
                 "Prueba desde UniLocal ",
-                "narvaezkevin82@gmail.com"
+                "luisacahe5@gmail.com"
         ));
     }
 

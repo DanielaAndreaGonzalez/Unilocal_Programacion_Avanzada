@@ -32,6 +32,11 @@ public class NegocioServicioImpl implements NegocioServicio {
                 .telefono(registroNegocioDTO.telefono())
                 .categoria(registroNegocioDTO.categoria())
                 .build();
+
+
+
+
+
         //Se guarda en la base de datos y obtenemos el objeto registrado
         Negocio negocioGuardado = negocioRepo.save(negocio);
         //Retornamos el id (código) del cliente registrado
