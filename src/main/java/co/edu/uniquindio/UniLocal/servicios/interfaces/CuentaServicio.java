@@ -8,9 +8,7 @@ public interface CuentaServicio {
 
     void eliminarCuenta(String codigo) throws Exception;
 
-    void iniciariSesion(InicioSesionDTO InicioSesionDTO);
-
-    void enviarLinkRecuperacion(String email);
+    void enviarLinkRecuperacion(String email) throws Exception;
 
     void recuperarPassword(RecuperacionPasswordDTO RecuperacionPasswordDTO);
 

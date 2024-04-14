@@ -3,6 +3,7 @@ import co.edu.uniquindio.UniLocal.entidades.Cuenta;
 import co.edu.uniquindio.UniLocal.enums.EstadoRegistro;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.util.List;
@@ -19,8 +20,8 @@ public class Cliente extends Cuenta implements Serializable {
     private String fotoPerfil;
     private List<String> telefono;
     private String ciudad;
-
-
+    @DBRef
+    private List<Negocio> favoritos;
 
     public Cliente(String email, String password, String nombre, EstadoRegistro estado, String codigo, String cedula, String nickname, String fotoPerfil, List<String> telefono, String ciudad) {
         super(email, password, nombre, estado);

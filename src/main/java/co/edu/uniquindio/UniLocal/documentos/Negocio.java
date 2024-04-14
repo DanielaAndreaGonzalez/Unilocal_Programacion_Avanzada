@@ -1,7 +1,9 @@
 package co.edu.uniquindio.UniLocal.documentos;
 
+import co.edu.uniquindio.UniLocal.entidades.Ubicacion;
 import co.edu.uniquindio.UniLocal.enums.EstadoNegocio;
 import co.edu.uniquindio.UniLocal.enums.EstadoRegistro;
+import co.edu.uniquindio.UniLocal.enums.TipoNegocio;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,13 +25,14 @@ public class Negocio {
     private String imagen;
     private List<String> horario;
     private List<String> telefono;
-    private String categoria;
-    private List<String> comentario;
+    private List<String> comentarios;
     private String calificacion;
     private EstadoNegocio estado;
+    private Ubicacion ubicacion;
+    private TipoNegocio tipoNegocio;
     @Builder
     public Negocio(String codigo, String nombre,String descripcion,String imagen,List<String> horario,List<String> telefono
-            ,String categoria,List<String> comentario,String calificacion, EstadoNegocio estado) {
+            ,List<String> comentarios,String calificacion, EstadoNegocio estado, Ubicacion ubicacion,TipoNegocio tipoNegocio) {
 
         this.codigo = codigo;
         this.nombre = nombre;
@@ -37,10 +40,10 @@ public class Negocio {
         this.imagen = imagen;
         this.horario = horario;
         this.telefono = telefono;
-        this.categoria = categoria;
-        this.comentario = comentario;
+        this.comentarios = comentarios;
         this.calificacion = calificacion;
         this.estado = estado;
-
+        this.ubicacion = ubicacion;
+        this.tipoNegocio = tipoNegocio;
     }
 }

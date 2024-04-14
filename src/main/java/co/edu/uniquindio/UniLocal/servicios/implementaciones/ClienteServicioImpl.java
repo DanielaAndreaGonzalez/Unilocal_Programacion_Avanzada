@@ -1,11 +1,18 @@
 package co.edu.uniquindio.UniLocal.servicios.implementaciones;
 
+import co.edu.uniquindio.UniLocal.documentos.Negocio;
 import co.edu.uniquindio.UniLocal.dto.*;
+import co.edu.uniquindio.UniLocal.enums.EstadoNegocio;
 import co.edu.uniquindio.UniLocal.enums.EstadoRegistro;
+import co.edu.uniquindio.UniLocal.enums.TipoNegocio;
+import co.edu.uniquindio.UniLocal.excepciones.AutorizacionException;
 import co.edu.uniquindio.UniLocal.excepciones.ResourceNotFoundException;
 import co.edu.uniquindio.UniLocal.documentos.Cliente;
 import co.edu.uniquindio.UniLocal.repositorio.ClienteRepo;
+import co.edu.uniquindio.UniLocal.repositorio.NegocioRepo;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ClienteServicio;
+import co.edu.uniquindio.UniLocal.servicios.interfaces.EmailServicio;
+import co.edu.uniquindio.UniLocal.utils.NegocioUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,12 +24,16 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ClienteServicioImpl implements ClienteServicio {
-
-
     private final ClienteRepo clienteRepo;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo){
+    private final EmailServicio emailServicio;
+
+    private final NegocioRepo negocioRepo;
+
+    public ClienteServicioImpl(ClienteRepo clienteRepo,EmailServicio emailServicio,NegocioRepo negocioRepo){
         this.clienteRepo = clienteRepo;
+        this.emailServicio = emailServicio;
+        this.negocioRepo = negocioRepo;
     }
     @Override
     public String registrarsCliente(RegistroUsuarioDTO registroUsuarioDTO) throws Exception {
@@ -119,18 +130,34 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
+    public List<NegocioDTO> obtenerNegociosMejorCalificados(TipoNegocio tipoNegocio) throws Exception {
+        List<Negocio>  negociosMejorCalificaciones = negocioRepo.findNegociosMejorCalificacion(tipoNegocio);
+        if(negociosMejorCalificaciones.isEmpty()){
+            throw new Exception("No se encontraron negocios");
+        }
+        return NegocioUtils.convertirListaNegocioAListaNegocioDto( negociosMejorCalificaciones);
+    }
+
+    @Override
     public void eliminarCuenta(String idCuenta) throws ResourceNotFoundException {
         Cliente cliente = obtenerClientePorIdCuenta(idCuenta) ;
         cliente.setEstado(EstadoRegistro.INACTIVO);
         clienteRepo.save(cliente);
     }
     @Override
-    public void iniciariSesion(InicioSesionDTO InicioSesionDTO) {
-
-    }
-    @Override
-    public void enviarLinkRecuperacion(String email) {
-
+    public void enviarLinkRecuperacion(String email) throws Exception{
+        String asunto = "Recuperar contraseña ";
+        String cuerpo = "Hola! has solicitado cambiar tu contraseña, por favor ingresa  a este link  localhost:8080/api/auth/recuperar-contrasena ";
+        EmailDTO correoAutorizacion = new EmailDTO(
+                asunto,
+                cuerpo,
+                email
+        );
+        try {
+            emailServicio.enviarCorreo(correoAutorizacion);
+        } catch (Exception e) {
+            throw new Exception("No se pudo restablecer la contraseña");
+        }
     }
     @Override
     public void recuperarPassword(RecuperacionPasswordDTO RecuperacionPasswordDTO) {
@@ -138,6 +165,26 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
     @Override
     public void cambiarPassword(CambioPasswordDTO cambioPasswordDTO) throws Exception {
+    }
+
+    @Override
+    public boolean agregarAFavoritos(String clienteId, String negocioId) throws Exception {
+        Cliente cliente = clienteRepo.findById(clienteId).orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        Negocio negocio = negocioRepo.findById(negocioId).orElseThrow(() -> new RuntimeException("Negocio no encontrado"));
+
+        cliente.getFavoritos().add(negocio);
+        clienteRepo.save(cliente);
+        return true;
+    }
+
+    @Override
+    public boolean quitarDeFavoritos(String clienteId, String negocioId) throws Exception {
+        Cliente cliente = clienteRepo.findById(clienteId).orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        Negocio negocio = negocioRepo.findById(negocioId).orElseThrow(() -> new RuntimeException("Negocio no encontrado"));
+
+        cliente.getFavoritos().remove(negocio);
+        clienteRepo.save(cliente);
+        return true;
     }
 
     private Cliente obtenerClientePorIdCuenta(String idCuenta)throws ResourceNotFoundException

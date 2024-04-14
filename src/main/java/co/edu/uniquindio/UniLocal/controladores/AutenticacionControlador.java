@@ -39,7 +39,6 @@ public class AutenticacionControlador {
         return ResponseEntity.ok().body(new MensajeDTO<>(false, tokenDTO));
     }
 
-
     @PostMapping("/crear-usuario")
     public ResponseEntity<MensajeDTO<String>> crearUsuario(@Valid @RequestBody RegistroUsuarioDTO usuario) {
         try {
