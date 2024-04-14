@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class AutenticacionControlador {
+public class AutenticacionController {
 
     private final AutenticacionServicio autenticacionServicio;
 
@@ -38,6 +38,7 @@ public class AutenticacionControlador {
         TokenDTO tokenDTO = autenticacionServicio.iniciarSesionModerador(loginDTO);
         return ResponseEntity.ok().body(new MensajeDTO<>(false, tokenDTO));
     }
+
 
     @PostMapping("/crear-usuario")
     public ResponseEntity<MensajeDTO<String>> crearUsuario(@Valid @RequestBody RegistroUsuarioDTO usuario) {

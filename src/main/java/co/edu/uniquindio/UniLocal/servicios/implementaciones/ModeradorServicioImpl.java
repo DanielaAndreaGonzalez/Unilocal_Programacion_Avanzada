@@ -74,9 +74,9 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     }
 
     @Override
-    public boolean autorizarNegocio(AutorizarNegocioDTO autorizarNegocioDTO) throws AutorizacionException {
+    public void autorizarNegocio(AutorizarNegocioDTO autorizarNegocioDTO) throws AutorizacionException {
 
-        Optional<Negocio> negocioEncontrado = negocioRepo.findById(autorizarNegocioDTO.codigo());
+        Optional<Negocio> negocioEncontrado = negocioRepo.findById(autorizarNegocioDTO.codigoNegocio());
         if(negocioEncontrado.isEmpty()){
             throw new AutorizacionException("No se encontro el negocio");
         }
@@ -106,12 +106,11 @@ public class ModeradorServicioImpl implements ModeradorServicio {
                 autorizarNegocioDTO.observacion()
         );
         historialModeracionRepo.save(historialModeracion);
-        return true;
     }
 
     @Override
-    public boolean rechazarNegocio(AutorizarNegocioDTO autorizarNegocioDTO) throws AutorizacionException {
-        Optional<Negocio> negocioEncontrado = negocioRepo.findById(autorizarNegocioDTO.codigo());
+    public void rechazarNegocio(AutorizarNegocioDTO autorizarNegocioDTO) throws AutorizacionException {
+        Optional<Negocio> negocioEncontrado = negocioRepo.findById(autorizarNegocioDTO.codigoNegocio());
         if(negocioEncontrado.isEmpty()){
             throw new AutorizacionException("No se encontro el negocio");
         }
@@ -141,7 +140,6 @@ public class ModeradorServicioImpl implements ModeradorServicio {
                 autorizarNegocioDTO.observacion()
         );
         historialModeracionRepo.save(historialModeracion);
-        return false;
     }
 
     @Override

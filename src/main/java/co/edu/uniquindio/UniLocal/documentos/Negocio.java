@@ -1,5 +1,6 @@
 package co.edu.uniquindio.UniLocal.documentos;
 
+import co.edu.uniquindio.UniLocal.entidades.Horario;
 import co.edu.uniquindio.UniLocal.entidades.Ubicacion;
 import co.edu.uniquindio.UniLocal.enums.EstadoNegocio;
 import co.edu.uniquindio.UniLocal.enums.EstadoRegistro;
@@ -12,6 +13,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Objects;
 
 @Document("negocios")
 @Getter
@@ -22,28 +24,39 @@ public class Negocio {
     private String codigo;
     private String nombre;
     private String descripcion;
-    private String imagen;
-    private List<String> horario;
-    private List<String> telefono;
-    private List<String> comentarios;
-    private String calificacion;
+    private List<String> imagenes;
+    private List<Horario> horarios;
+    private List<String> telefonos;
+    private List<Comentario> comentarios;
     private EstadoNegocio estado;
     private Ubicacion ubicacion;
     private TipoNegocio tipoNegocio;
     @Builder
-    public Negocio(String codigo, String nombre,String descripcion,String imagen,List<String> horario,List<String> telefono
-            ,List<String> comentarios,String calificacion, EstadoNegocio estado, Ubicacion ubicacion,TipoNegocio tipoNegocio) {
+    public Negocio(String codigo, String nombre,String descripcion,List<String> imagenes,List<Horario> horarios,List<String> telefonos
+            ,List<Comentario> comentarios, EstadoNegocio estado, Ubicacion ubicacion,TipoNegocio tipoNegocio) {
 
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.imagen = imagen;
-        this.horario = horario;
-        this.telefono = telefono;
+        this.imagenes = imagenes;
+        this.horarios = horarios;
+        this.telefonos = telefonos;
         this.comentarios = comentarios;
-        this.calificacion = calificacion;
         this.estado = estado;
         this.ubicacion = ubicacion;
         this.tipoNegocio = tipoNegocio;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Negocio negocio = (Negocio) obj;
+        return Objects.equals(codigo, negocio.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
     }
 }

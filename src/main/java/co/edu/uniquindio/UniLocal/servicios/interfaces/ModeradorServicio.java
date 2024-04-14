@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface ModeradorServicio extends CuentaServicio{
 
-    public boolean autorizarNegocio(AutorizarNegocioDTO autorizarNegocioDTO) throws AutorizacionException;
+    public void autorizarNegocio(AutorizarNegocioDTO autorizarNegocioDTO) throws AutorizacionException;
 
-    public boolean rechazarNegocio(AutorizarNegocioDTO autorizarNegocioDTO) throws AutorizacionException;
+    public void rechazarNegocio(AutorizarNegocioDTO autorizarNegocioDTO) throws AutorizacionException;
 
     public List<NegocioDTO> obtenerLugaresPendientesAutorizar() throws AutorizacionException;
 

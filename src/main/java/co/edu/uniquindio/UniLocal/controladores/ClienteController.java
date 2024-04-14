@@ -1,6 +1,7 @@
 package co.edu.uniquindio.UniLocal.controladores;
 
 import co.edu.uniquindio.UniLocal.dto.*;
+import co.edu.uniquindio.UniLocal.enums.TipoNegocio;
 import co.edu.uniquindio.UniLocal.excepciones.ResourceNotFoundException;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ClienteServicio;
 import jakarta.validation.Valid;
@@ -63,7 +64,37 @@ public class ClienteController {
         return ResponseEntity.ok().body(new MensajeDTO<>(false, clienteServicio.listarClientes()));
     }
 
+    @GetMapping("/listar-mejores-calificados/{tipoNegocio}")
+    public ResponseEntity<MensajeDTO<List<NegocioDTO>>> obtenerNegociosMejorCalificados(@PathVariable TipoNegocio tipoNegocio) throws Exception {
+        return ResponseEntity.ok().body(new MensajeDTO<>(false, clienteServicio.obtenerNegociosMejorCalificados(tipoNegocio)));
+    }
 
+    @PostMapping("/agregar-favoritos")
+    public  ResponseEntity<MensajeDTO<?>> agregarFavoritos(@RequestBody NegocioFavoritoDTO negocioFavoritoDTO) {
+        try {
+            return ResponseEntity.ok().body(new MensajeDTO<>(false, clienteServicio.agregarAFavoritos(negocioFavoritoDTO)));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error al agregar a favoritos"));
+        }
+    }
 
+    @PostMapping("/quitar-favoritos")
+    public  ResponseEntity<MensajeDTO<?>> quitarFavoritos(@RequestBody NegocioFavoritoDTO negocioFavoritoDTO) {
+        try {
+            return ResponseEntity.ok().body(new MensajeDTO<>(false, clienteServicio.quitarDeFavoritos(negocioFavoritoDTO)));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error al quitar de favoritos"));
+        }
+    }
+
+    @GetMapping("/listar-negocios-favoritos/{clienteId}")
+    public ResponseEntity<MensajeDTO<?>> listarNegociosFavoritos(@PathVariable String clienteId){
+        try {
+            return ResponseEntity.ok().body(new MensajeDTO<>(false, clienteServicio.listarNegociosFavoritos(clienteId)));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "El usuario no tiene favoritos"));
+        }
+
+    }
 
 }

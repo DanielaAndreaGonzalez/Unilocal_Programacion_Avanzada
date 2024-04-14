@@ -6,6 +6,7 @@ import co.edu.uniquindio.UniLocal.enums.EstadoNegocio;
 import co.edu.uniquindio.UniLocal.enums.EstadoRegistro;
 import co.edu.uniquindio.UniLocal.enums.TipoNegocio;
 import co.edu.uniquindio.UniLocal.excepciones.AutorizacionException;
+import co.edu.uniquindio.UniLocal.excepciones.ExcepcionesGlobales;
 import co.edu.uniquindio.UniLocal.excepciones.ResourceNotFoundException;
 import co.edu.uniquindio.UniLocal.documentos.Cliente;
 import co.edu.uniquindio.UniLocal.repositorio.ClienteRepo;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -168,23 +170,56 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public boolean agregarAFavoritos(String clienteId, String negocioId) throws Exception {
-        Cliente cliente = clienteRepo.findById(clienteId).orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
-        Negocio negocio = negocioRepo.findById(negocioId).orElseThrow(() -> new RuntimeException("Negocio no encontrado"));
+    public boolean agregarAFavoritos(NegocioFavoritoDTO negocioFavoritoDTO) throws Exception {
+        Cliente cliente = clienteRepo.findById(negocioFavoritoDTO.clienteId()).orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        Negocio negocio = negocioRepo.findById(negocioFavoritoDTO.negocioId()).orElseThrow(() -> new RuntimeException("Negocio no encontrado"));
 
-        cliente.getFavoritos().add(negocio);
+        if (cliente.getFavoritos() == null) {
+            cliente.setFavoritos(new ArrayList<>()); // Inicializa la lista si es nula
+        }
+        if (!cliente.getFavoritos().contains(negocio)) {
+            cliente.getFavoritos().add(negocio);
+        }
         clienteRepo.save(cliente);
         return true;
     }
 
     @Override
-    public boolean quitarDeFavoritos(String clienteId, String negocioId) throws Exception {
-        Cliente cliente = clienteRepo.findById(clienteId).orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
-        Negocio negocio = negocioRepo.findById(negocioId).orElseThrow(() -> new RuntimeException("Negocio no encontrado"));
+    public boolean quitarDeFavoritos(NegocioFavoritoDTO negocioFavoritoDTO) throws Exception {
+        Cliente cliente = clienteRepo.findById(negocioFavoritoDTO.clienteId()).orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        Negocio negocio = negocioRepo.findById(negocioFavoritoDTO.negocioId()).orElseThrow(() -> new RuntimeException("Negocio no encontrado"));
 
-        cliente.getFavoritos().remove(negocio);
-        clienteRepo.save(cliente);
-        return true;
+        if (cliente.getFavoritos() != null && !cliente.getFavoritos().isEmpty()) {
+            cliente.getFavoritos().remove(negocio);
+            clienteRepo.save(cliente);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<NegocioDTO> listarNegociosFavoritos(String clienteId) throws Exception {
+
+        Optional <Cliente> cliente = clienteRepo.findById(clienteId);
+
+        if(cliente.isEmpty())
+        {
+            throw new Exception("No se encontró el cliente con id"+clienteId);
+        }
+
+        if(cliente.get().getFavoritos() == null || cliente.get().getFavoritos().isEmpty())
+        {
+            throw new Exception("No se encontró el cliente con id"+clienteId);
+        }
+
+        List<String> idFavoritos = cliente.get().getFavoritos().stream()
+                                .map(Negocio::getCodigo)
+                                .collect(Collectors.toList());
+        List<Negocio> negociosFavoritos = negocioRepo.findAllById(idFavoritos);
+
+        return negociosFavoritos.stream()
+                .map(NegocioUtils::convertirANegocioDTO)
+                .collect(Collectors.toList());
     }
 
     private Cliente obtenerClientePorIdCuenta(String idCuenta)throws ResourceNotFoundException

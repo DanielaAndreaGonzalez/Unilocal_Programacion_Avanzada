@@ -10,12 +10,6 @@ public class CuentaServicioImpl implements CuentaServicio {
     public void eliminarCuenta(String codigo) throws Exception {
 
     }
-
-    @Override
-    public void iniciariSesion(InicioSesionDTO InicioSesionDTO) {
-
-    }
-
     @Override
     public void enviarLinkRecuperacion(String email) {
 

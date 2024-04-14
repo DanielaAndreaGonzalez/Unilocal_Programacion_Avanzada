@@ -10,6 +10,7 @@ import co.edu.uniquindio.UniLocal.servicios.interfaces.NegocioServicio;
 import co.edu.uniquindio.UniLocal.utils.NegocioUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -29,12 +30,10 @@ public class NegocioServicioImpl implements NegocioServicio {
                 .builder()
                 .nombre(registroNegocioDTO.nombre())
                 .descripcion(registroNegocioDTO.descripcion())
-                .imagen(registroNegocioDTO.imagen())
-                .horario(registroNegocioDTO.horario())
-                .telefono(registroNegocioDTO.telefono())
-                .comentarios(registroNegocioDTO.comentarios())
-                .calificacion(registroNegocioDTO.calificacion())
-                .estado(registroNegocioDTO.estado())
+                .imagenes(registroNegocioDTO.imagenes())
+                .horarios(registroNegocioDTO.horarios())
+                .telefonos(registroNegocioDTO.telefonos())
+                .estado(EstadoNegocio.PENDIENTE)
                 .ubicacion(registroNegocioDTO.ubicacion())
                 .tipoNegocio(registroNegocioDTO.tipoNegocio())
                 .build();
@@ -47,11 +46,11 @@ public class NegocioServicioImpl implements NegocioServicio {
     @Override
     public void actualizarNegocio(ActualizarNegocioDTO actualizarNegocioDTO) throws ResourceNotFoundException {
         Negocio negocio = obtenerNegocioPorId(actualizarNegocioDTO.id());
-        negocio.setImagen(actualizarNegocioDTO.imagen());
+        negocio.setImagenes(actualizarNegocioDTO.imagenes());
         negocio.setDescripcion(actualizarNegocioDTO.descripcion());
         negocio.setNombre(actualizarNegocioDTO.nombre());
-        negocio.setHorario(actualizarNegocioDTO.horario());
-        negocio.setTelefono(actualizarNegocioDTO.telefono());
+        negocio.setHorarios(actualizarNegocioDTO.horarios());
+        negocio.setTelefonos(actualizarNegocioDTO.telefonos());
         negocio.setUbicacion(actualizarNegocioDTO.ubicacion());
         negocio.setTipoNegocio(actualizarNegocioDTO.tipoNegocio());
 
@@ -61,7 +60,7 @@ public class NegocioServicioImpl implements NegocioServicio {
     }
 
     @Override
-    public void eliminarNegocio(String idNegocio)throws ResourceNotFoundException {
+    public void eliminarNegocio(String idNegocio) throws ResourceNotFoundException {
         //Obtenemos el cliente que se quiere eliminar y le asignamos el estado
         //inactivo
         Negocio negocio = obtenerNegocioPorId(idNegocio) ;
@@ -70,18 +69,15 @@ public class NegocioServicioImpl implements NegocioServicio {
     }
 
     @Override
-    public void obtenerNegocio() {
-
+    public NegocioDTO obtenerNegocio(String codigo) throws ResourceNotFoundException {
+        Negocio negocioEncontrado = obtenerNegocioPorId(codigo);
+        return NegocioUtils.convertirANegocioDTO(negocioEncontrado);
     }
 
     @Override
-    public void filtrarPorEstado() {
-
-    }
-
-    @Override
-    public void buscarNegocios() {
-
+    public List<NegocioDTO> listarNegocios() {
+        List<Negocio> negocios =  negocioRepo.findAll();
+        return NegocioUtils.convertirListaNegocioAListaNegocioDto(negocios);
     }
 
     @Override
@@ -106,7 +102,7 @@ public class NegocioServicioImpl implements NegocioServicio {
 
     @Override
     public NegocioDTO obtenerNegocioPorNombre(String nombreNegocio) throws ResourceNotFoundException {
-        Optional<Negocio> negocioEncontrado = negocioRepo.findByNombre(nombreNegocio);
+        Optional<Negocio> negocioEncontrado = negocioRepo.findByNombre(nombreNegocio, EstadoNegocio.ACTIVO);
         if (negocioEncontrado.isEmpty()) {
             throw new ResourceNotFoundException("No se encontró el negocio con nombre: " + nombreNegocio);
         }
@@ -114,32 +110,28 @@ public class NegocioServicioImpl implements NegocioServicio {
     }
 
     @Override
-    public NegocioDTO obtenerNegocioPorTipoNegocio(TipoNegocio tipoNegocio) throws ResourceNotFoundException {
-        Optional<Negocio> negocioEncontrado = negocioRepo.findByTipoNegocio(tipoNegocio);
-        if (negocioEncontrado.isEmpty()) {
+    public List<NegocioDTO> obtenerNegocioPorTipoNegocio(TipoNegocio tipoNegocio) throws ResourceNotFoundException {
+        List<Negocio> negociosEncontrado = negocioRepo.findByTipoNegocio(tipoNegocio, EstadoNegocio.ACTIVO);
+        if (negociosEncontrado.isEmpty()) {
             throw new ResourceNotFoundException("No se encontró el negocio con tipoNegocio: " + tipoNegocio);
         }
-        return NegocioUtils.convertirANegocioDTO(negocioEncontrado.get());
+        return NegocioUtils.convertirListaNegocioAListaNegocioDto(negociosEncontrado);
     }
 
     @Override
     public NegocioDTO obtenerNegocioPorUbicacion(Ubicacion ubicacion) throws ResourceNotFoundException {
-        Optional<Negocio> negocioEncontrado = negocioRepo.findByUbicacion(ubicacion);
+        Optional<Negocio> negocioEncontrado = negocioRepo.findByUbicacion(ubicacion, EstadoNegocio.ACTIVO);
         if (negocioEncontrado.isEmpty()) {
-            throw new ResourceNotFoundException("No se encontró el negocio ");
+            throw new ResourceNotFoundException("No se encontró el negocio con dicha unbicacion");
         }
         return NegocioUtils.convertirANegocioDTO(negocioEncontrado.get());
     }
 
     private Negocio obtenerNegocioPorId(String idNegocio) throws ResourceNotFoundException {
         Optional<Negocio> optionalNegocio = negocioRepo.findById(idNegocio);
-
         if (optionalNegocio.isEmpty()) {
             throw new ResourceNotFoundException("No se encontró el negocio con id: " + idNegocio);
         }
-        //Obtenemos el cliente que se quiere eliminar y le asignamos el estado
-        //inactivo
         return optionalNegocio.get();
-
     }
 }

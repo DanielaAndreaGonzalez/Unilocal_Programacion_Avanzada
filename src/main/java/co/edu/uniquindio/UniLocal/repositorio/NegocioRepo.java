@@ -23,9 +23,17 @@ public interface NegocioRepo extends MongoRepository<Negocio, String> {
             "{ '$sort': { 'promedioCalificacion': -1 } }" // Ordena los resultados por calificación promedio en orden descendente
     })
     List<Negocio> findNegociosMejorCalificacion(TipoNegocio tipoNegocio);
-
-    Optional<Negocio> findByNombre(String nombreNegocio);
-    Optional<Negocio> findByTipoNegocio(TipoNegocio tipoNegocio);
-    Optional<Negocio> findByUbicacion(Ubicacion ubicacion);
+    @Aggregation(pipeline = {
+            "{ '$match': { 'nombre': ?0, 'estado': ?1 } }"
+    })
+    Optional<Negocio> findByNombre(String nombreNegocio, EstadoNegocio estadoNegocio);
+    @Aggregation(pipeline = {
+            "{ '$match': { 'tipoNegocio': ?0, 'estado': ?1 } }"
+    })
+    List<Negocio> findByTipoNegocio(TipoNegocio tipoNegocio, EstadoNegocio estadoNegocio);
+    @Aggregation(pipeline = {
+            "{ '$match': { 'ubicacion': ?0, 'estado': ?1 } }"
+    })
+    Optional<Negocio> findByUbicacion(Ubicacion ubicacion, EstadoNegocio estadoNegocio);
 
 }

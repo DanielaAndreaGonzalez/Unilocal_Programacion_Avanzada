@@ -9,8 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.ArrayList; import java.util.List;
-
-public class ExcepcionesGlobales {
+@RestControllerAdvice
+public class ExcepcionesGlobales extends Exception{
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<MensajeDTO<String>> generalException(Exception e)

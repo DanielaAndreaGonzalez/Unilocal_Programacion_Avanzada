@@ -5,6 +5,7 @@ public enum EstadoNegocio {
         APROBADO,
         RECHAZADO,
         PENDIENTE,
+        INACTIVO,
 
-        INACTIVO
+        ACTIVO
 }
