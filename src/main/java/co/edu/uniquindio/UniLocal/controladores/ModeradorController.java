@@ -46,4 +46,23 @@ public class ModeradorController {
         }
     }
 
+    @GetMapping("/obtener-historico-lugares-autorizados/{moderadorId}")
+    public ResponseEntity<MensajeDTO<?>> obtenerHistoricoLugaresAutorizados(@PathVariable String moderadorId) {
+        try {
+            return ResponseEntity.ok().body(new MensajeDTO<>(false, moderadorServicio.obtenerHistoricoLugaresAutorizados(moderadorId)));
+        } catch (AutorizacionException e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, e.getMessage()));
+        }
+    }
+
+    @GetMapping("/obtener-historico-lugares-rechazados/{moderadorId}")
+    public ResponseEntity<MensajeDTO<?>> obtenerHistoricoLugaresRechazados(@PathVariable String moderadorId) {
+        try {
+            return ResponseEntity.ok().body(new MensajeDTO<>(false, moderadorServicio.obtenerHistoricoLugaresRechazados(moderadorId)));
+        } catch (AutorizacionException e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, e.getMessage()));
+        }
+    }
+
+
 }

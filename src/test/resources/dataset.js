@@ -68,3 +68,27 @@ db.comentarios.insertMany([
         _class: 'co.edu.uniquindio.UniLocal.documentos.Comentario'
     }
 ]);
+
+db.moderador.insertMany([
+    {
+        cedula: "115195033",
+        nickname: 'Moderador 1',
+        fotoPerfil: 'fotomoderador1.png',
+        telefono: ['312121211'],
+        _class: 'co.edu.uniquindio.UniLocal.documentos.Moderador'
+    },
+    {
+        cedula: "1003818314",
+        nickname: 'Moderador 2',
+        fotoPerfil: 'fotomoderador2.png',
+        telefono: ['313144223','065454'],
+        _class: 'co.edu.uniquindio.UniLocal.documentos.Moderador'
+    },
+    {
+        cedula: "51992345",
+        nickname: 'Moderador 3',
+        fotoPerfil: 'fotomoderador3.png',
+        telefono: ['3145213456'],
+        _class: 'co.edu.uniquindio.UniLocal.documentos.Moderador'
+    }
+]);

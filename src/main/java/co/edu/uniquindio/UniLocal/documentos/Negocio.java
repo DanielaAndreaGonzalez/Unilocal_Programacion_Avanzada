@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,9 +32,10 @@ public class Negocio {
     private EstadoNegocio estado;
     private Ubicacion ubicacion;
     private TipoNegocio tipoNegocio;
+    private String codigoCliente;
     @Builder
     public Negocio(String codigo, String nombre,String descripcion,List<String> imagenes,List<Horario> horarios,List<String> telefonos
-            ,List<Comentario> comentarios, EstadoNegocio estado, Ubicacion ubicacion,TipoNegocio tipoNegocio) {
+            ,List<Comentario> comentarios, EstadoNegocio estado, Ubicacion ubicacion,TipoNegocio tipoNegocio, String codigoCliente) {
 
         this.codigo = codigo;
         this.nombre = nombre;
@@ -45,6 +47,7 @@ public class Negocio {
         this.estado = estado;
         this.ubicacion = ubicacion;
         this.tipoNegocio = tipoNegocio;
+        this.codigoCliente = codigoCliente;
     }
 
     @Override

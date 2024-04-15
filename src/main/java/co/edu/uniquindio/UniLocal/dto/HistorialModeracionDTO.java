@@ -9,6 +9,6 @@ public record HistorialModeracionDTO(
           String moderadorId ,
           Date fechaAccion ,
           EstadoNegocio estadoNegocio ,
-          String razonRechazo
+          String observacion
 ) {
 }

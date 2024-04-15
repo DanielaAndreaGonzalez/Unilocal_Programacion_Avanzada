@@ -6,8 +6,9 @@ public record RegistroComentarioDTO(
         String codigoComentario,
         String mensaje,
         String respuesta,
-        String clienteId,
+        String codigoCliente,
+        String codigoNegocio,
         Date fechaRegistro,
-        int calificacion
+        double calificacion
 )
 {}

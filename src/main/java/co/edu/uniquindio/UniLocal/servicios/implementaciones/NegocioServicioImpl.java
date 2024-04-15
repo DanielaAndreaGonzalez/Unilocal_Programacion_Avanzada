@@ -36,6 +36,7 @@ public class NegocioServicioImpl implements NegocioServicio {
                 .estado(EstadoNegocio.PENDIENTE)
                 .ubicacion(registroNegocioDTO.ubicacion())
                 .tipoNegocio(registroNegocioDTO.tipoNegocio())
+                .codigoCliente(registroNegocioDTO.codigoCliente())
                 .build();
         //Se guarda en la base de datos y obtenemos el objeto registrado
         Negocio negocioGuardado = negocioRepo.save(negocio);
@@ -53,7 +54,7 @@ public class NegocioServicioImpl implements NegocioServicio {
         negocio.setTelefonos(actualizarNegocioDTO.telefonos());
         negocio.setUbicacion(actualizarNegocioDTO.ubicacion());
         negocio.setTipoNegocio(actualizarNegocioDTO.tipoNegocio());
-
+        negocio.setCodigoCliente(actualizarNegocioDTO.codigoCliente());
         //Como el objeto cliente ya tiene un id, el save() no crea un nuevo registro sino
         //que actualiza el que ya existe
         negocioRepo.save(negocio);

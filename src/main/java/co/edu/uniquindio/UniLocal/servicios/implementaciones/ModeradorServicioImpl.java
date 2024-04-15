@@ -9,6 +9,7 @@ import co.edu.uniquindio.UniLocal.enums.EstadoNegocio;
 import co.edu.uniquindio.UniLocal.enums.EstadoRegistro;
 import co.edu.uniquindio.UniLocal.excepciones.AutorizacionException;
 import co.edu.uniquindio.UniLocal.excepciones.ResourceNotFoundException;
+import co.edu.uniquindio.UniLocal.repositorio.ClienteRepo;
 import co.edu.uniquindio.UniLocal.repositorio.HistorialModeracionRepo;
 import co.edu.uniquindio.UniLocal.repositorio.ModeradorRepo;
 import co.edu.uniquindio.UniLocal.repositorio.NegocioRepo;
@@ -28,15 +29,16 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
     private final NegocioRepo negocioRepo;
     private final EmailServicio emailServicio;
-
     private final HistorialModeracionRepo historialModeracionRepo;
-
     private final ModeradorRepo moderadorRepo;
-    public ModeradorServicioImpl(NegocioRepo negocioRepo, EmailServicio emailServicio,HistorialModeracionRepo historialModeracionRepo,ModeradorRepo moderadorRepo){
+    private final ClienteRepo clienteRepo;
+    public ModeradorServicioImpl(NegocioRepo negocioRepo, EmailServicio emailServicio,HistorialModeracionRepo historialModeracionRepo,ModeradorRepo moderadorRepo
+                                 ,ClienteRepo clienteRepo){
         this.negocioRepo = negocioRepo;
         this.emailServicio = emailServicio;
         this.historialModeracionRepo = historialModeracionRepo;
         this.moderadorRepo = moderadorRepo;
+        this.clienteRepo = clienteRepo;
     }
     @Override
     public void eliminarCuenta(String idCuenta) throws Exception {
@@ -81,13 +83,18 @@ public class ModeradorServicioImpl implements ModeradorServicio {
             throw new AutorizacionException("No se encontro el negocio");
         }
 
+        Optional<Cliente> clienteEncontrado = clienteRepo.findById(autorizarNegocioDTO.clienteId());
+        if(clienteEncontrado.isEmpty()){
+            throw new AutorizacionException("No se encontro el cliente");
+        }
+
         //1. enviar correo a cliente
-        String asunto = "Autorizacion Negocio ".concat(autorizarNegocioDTO.nombre());
+        String asunto = "Autorizacion Negocio ".concat(negocioEncontrado.get().getNombre());
         String cuerpo = "Su negocio ha sido aprobado con éxito para estar en la plataforma UniLocal";
         EmailDTO correoAutorizacion = new EmailDTO(
                 asunto,
                 cuerpo,
-                autorizarNegocioDTO.email()
+                clienteEncontrado.get().getEmail()
         );
         try {
             emailServicio.enviarCorreo(correoAutorizacion);
@@ -114,14 +121,20 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         if(negocioEncontrado.isEmpty()){
             throw new AutorizacionException("No se encontro el negocio");
         }
+
+        Optional<Cliente> clienteEncontrado = clienteRepo.findById(autorizarNegocioDTO.clienteId());
+        if(clienteEncontrado.isEmpty()){
+            throw new AutorizacionException("No se encontro el cliente");
+        }
         //1. enviar correo a cliente
-        String asunto = "Rechazo Negocio ".concat(autorizarNegocioDTO.nombre());
-        String cuerpo = "Su negocio ha sido rechazado, no puede estar en la plataforma UniLocal por las siguientes razones \n:"
-                .concat(autorizarNegocioDTO.observacion());
+        String asunto = "Rechazo Negocio ".concat(negocioEncontrado.get().getNombre());
+        String cuerpo = "Su negocio ha sido rechazado, no puede estar en la plataforma UniLocal por las siguientes razones: \n"
+                .concat(autorizarNegocioDTO.observacion())
+                .concat(". Usted tiene 5 días para realizar la modificacion pertinentes y enviarlo de nuevo a revision.");
         EmailDTO correoAutorizacion = new EmailDTO(
                 asunto,
                 cuerpo,
-                autorizarNegocioDTO.email()
+                clienteEncontrado.get().getEmail()
         );
         try {
             emailServicio.enviarCorreo(correoAutorizacion);
@@ -189,7 +202,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
                 historialModeracion.getModeradorId(),
                 historialModeracion.getFechaAccion(),
                 historialModeracion.getEstadoNegocio(),
-                historialModeracion.getRazonRechazo()
+                historialModeracion.getObservacion()
         );
     }
 

@@ -20,8 +20,13 @@ public class HistorialModeracion {
     private String moderadorId;
     private Date fechaAccion;
     private EstadoNegocio estadoNegocio;
-    private String razonRechazo;
+    private String observacion;
 
-    //constructor con todo
-    public HistorialModeracion(String lugarId, String moderadorId, Date fechaAccion, EstadoNegocio estadoNegocio, String razonRechazo) {}
+    public HistorialModeracion(String lugarId, String moderadorId, Date fechaAccion, EstadoNegocio estadoNegocio, String observacion) {
+        this.lugarId = lugarId;
+        this.moderadorId = moderadorId;
+        this.fechaAccion = fechaAccion;
+        this.estadoNegocio = estadoNegocio;
+        this.observacion = observacion;
+    }
 }

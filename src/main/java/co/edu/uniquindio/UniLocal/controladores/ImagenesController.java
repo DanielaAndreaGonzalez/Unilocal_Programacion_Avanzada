@@ -28,6 +28,7 @@ public class ImagenesController {
          return ResponseEntity.ok().body(new MensajeDTO<>(false, respuesta));
     }
 
+    @DeleteMapping("/eliminar")
     public ResponseEntity<MensajeDTO<Map>> eliminar(@RequestBody ImagenDTO imagenDTO) throws Exception{
         Map respuesta = imagenesServicio.eliminarImagen(imagenDTO.id());
         return ResponseEntity.ok().body(new MensajeDTO<>(false, respuesta));

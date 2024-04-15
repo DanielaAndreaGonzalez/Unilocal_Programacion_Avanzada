@@ -6,8 +6,7 @@ import java.util.Date;
 
 public record AutorizarNegocioDTO(
         @NotBlank String codigoNegocio,
-        String nombre,
-        String email,
+        String clienteId,
         String observacion,
         String moderadorId,
         Date fechaAccion

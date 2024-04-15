@@ -4,6 +4,7 @@ import co.edu.uniquindio.UniLocal.dto.*;
 import co.edu.uniquindio.UniLocal.enums.TipoNegocio;
 import co.edu.uniquindio.UniLocal.excepciones.ResourceNotFoundException;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ClienteServicio;
+import co.edu.uniquindio.UniLocal.servicios.interfaces.ComentarioServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class ClienteController {
 
     @Autowired
     private ClienteServicio clienteServicio;
-
+    @Autowired
+    private ComentarioServicio comentarioServicio;
     @PostMapping("/crear-usuario")
     public ResponseEntity<MensajeDTO<String>> crearUsuario(@Valid @RequestBody RegistroUsuarioDTO usuario) {
         try {
@@ -94,7 +96,33 @@ public class ClienteController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "El usuario no tiene favoritos"));
         }
-
     }
 
+    @PostMapping("/crear-comentario")
+    public ResponseEntity<MensajeDTO<String>> crearComentario(@RequestBody RegistroComentarioDTO registroComentarioDTO) {
+        try {
+            return ResponseEntity.ok().body(new MensajeDTO<>(false, comentarioServicio.crearComentario(registroComentarioDTO)));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error al crear el comentario"));
+        }
+    }
+
+    @PostMapping("/responder-comentario")
+    public ResponseEntity<MensajeDTO<String>> responderComentario(@RequestBody RespuestaComentarioDTO respuestaComentarioDTO) {
+        try {
+            comentarioServicio.responderComentario(respuestaComentarioDTO);
+            return ResponseEntity.ok().body(new MensajeDTO<>(false, "Respuesta enviada correctamente"));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error al responder el comentario"));
+        }
+    }
+
+    @GetMapping("/listar-comentarios-negocio/{negocioId}")
+    public ResponseEntity<MensajeDTO<?>> listarComentariosNegocio(@PathVariable String negocioId) {
+        try {
+            return ResponseEntity.ok().body(new MensajeDTO<>(false, comentarioServicio.listarComentariosNegocio(negocioId)));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error al listar los comentarios"));
+        }
+    }
 }

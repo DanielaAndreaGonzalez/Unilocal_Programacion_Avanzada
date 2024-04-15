@@ -13,6 +13,7 @@ public record RegistroNegocioDTO (
     List<Horario> horarios,
     List<String> telefonos,
     Ubicacion ubicacion,
-    TipoNegocio tipoNegocio
+    TipoNegocio tipoNegocio,
+    String codigoCliente
 ){}
 

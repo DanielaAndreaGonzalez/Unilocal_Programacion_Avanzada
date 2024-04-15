@@ -16,8 +16,9 @@ public class Comentario {
     private  String codigo;
     private String mensaje;
     private String respuesta;
-    private String clienteId;
+    private String codigoCliente;
+    private String codigoNegocio;
     private String fotoCliente;
     private Date fecha;
-    private int calificacion;
+    private double calificacion;
 }

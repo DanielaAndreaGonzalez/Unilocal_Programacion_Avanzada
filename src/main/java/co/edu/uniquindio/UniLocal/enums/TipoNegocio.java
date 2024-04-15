@@ -7,5 +7,6 @@ public enum TipoNegocio {
     HOTEL,
     MUSEO,
     DISCOTECA,
-    SUPERMERCADO
+    SUPERMERCADO,
+    PANADERIA
 }

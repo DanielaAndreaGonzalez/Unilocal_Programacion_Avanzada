@@ -25,7 +25,8 @@ public class NegocioUtils {
                 negocio.getComentarios(),
                 negocio.getEstado(),
                 negocio.getUbicacion(),
-                negocio.getTipoNegocio()
+                negocio.getTipoNegocio(),
+                negocio.getCodigoCliente()
         );
     }
 }

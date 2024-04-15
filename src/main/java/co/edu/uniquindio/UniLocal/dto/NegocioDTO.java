@@ -17,8 +17,8 @@ public record NegocioDTO(
          List<Comentario> comentarios,
          EstadoNegocio estado,
          Ubicacion ubicacion,
-
-         TipoNegocio tipoNegocio
+         TipoNegocio tipoNegocio,
+         String codigoCliente
 ) {
 
 }
