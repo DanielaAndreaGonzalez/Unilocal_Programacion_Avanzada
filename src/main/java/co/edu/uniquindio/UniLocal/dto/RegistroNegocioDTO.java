@@ -15,5 +15,7 @@ public record RegistroNegocioDTO (
     Ubicacion ubicacion,
     TipoNegocio tipoNegocio,
     String codigoCliente
-){}
+){
+
+}
 

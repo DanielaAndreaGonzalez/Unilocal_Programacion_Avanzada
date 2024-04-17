@@ -13,7 +13,11 @@ import co.edu.uniquindio.UniLocal.repositorio.ClienteRepo;
 import co.edu.uniquindio.UniLocal.repositorio.NegocioRepo;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ClienteServicio;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.EmailServicio;
+import co.edu.uniquindio.UniLocal.utils.JWTUtils;
 import co.edu.uniquindio.UniLocal.utils.NegocioUtils;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,10 +36,13 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     private final NegocioRepo negocioRepo;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo,EmailServicio emailServicio,NegocioRepo negocioRepo){
+    private final JWTUtils jwtUtils;
+
+    public ClienteServicioImpl(ClienteRepo clienteRepo,EmailServicio emailServicio,NegocioRepo negocioRepo,JWTUtils jwtUtils){
         this.clienteRepo = clienteRepo;
         this.emailServicio = emailServicio;
         this.negocioRepo = negocioRepo;
+        this.jwtUtils = jwtUtils;
     }
     @Override
     public String registrarsCliente(RegistroUsuarioDTO registroUsuarioDTO) throws Exception {
@@ -47,7 +54,6 @@ public class ClienteServicioImpl implements ClienteServicio {
         if( existeEmail(registroUsuarioDTO.email())){
             throw new Exception("El correo ya se encuentra registrado");
         }
-
         //Se crea el objeto Cliente
         Cliente cliente = new Cliente();
 //Se le asignan sus campos
@@ -162,11 +168,45 @@ public class ClienteServicioImpl implements ClienteServicio {
         }
     }
     @Override
-    public void recuperarPassword(RecuperacionPasswordDTO RecuperacionPasswordDTO) {
+    public void recuperarPassword(RecuperacionPasswordDTO RecuperacionPasswordDTO)throws Exception {
 
+        /*Optional <Cliente> clienteOptional = clienteRepo.findByCodigoSeguridad(RecuperacionPasswordDTO.codigoSeguridad());
+        Cliente cliente = clienteOptional.orElseThrow(() -> new Exception("Usuario no encontrado"));
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String nuevaPasswordEncriptada = passwordEncoder.encode(RecuperacionPasswordDTO.nuevaPassword());
+        cliente.setPassword(nuevaPasswordEncriptada);
+        clienteRepo.save(cliente);*/
     }
     @Override
     public void cambiarPassword(CambioPasswordDTO cambioPasswordDTO) throws Exception {
+        // Extraer y validar el token
+        Jws<Claims> claimsJws;
+        try {
+            claimsJws = jwtUtils.parseJwt(cambioPasswordDTO.token());
+        } catch (JwtException e) {
+            throw new Exception("Token inválido o expirado", e);
+        }
+        // Obtener el email del cuerpo del token (subject del token)
+        String email = claimsJws.getBody().getSubject();
+        if (email == null || email.isEmpty()) {
+            throw new Exception("El token no contiene el email del usuario");
+        }
+
+        // Verificar que el email extraído del token coincida con el ID (email) del cambioPasswordDTO
+        if (!email.equals(cambioPasswordDTO.codigoCliente())) {
+            throw new Exception("El email del token no coincide con la solicitud de cambio de contraseña");
+        }
+
+        Optional<Cliente> clienteEncontrado = clienteRepo.findByEmail(email);
+        Cliente cliente = clienteEncontrado.orElseThrow(() -> new Exception("Usuario no encontrado"));
+
+        // Hash de la nueva contraseña
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String nuevaPasswordEncriptada = passwordEncoder.encode(cambioPasswordDTO.passwordNueva());
+
+        cliente.setPassword(nuevaPasswordEncriptada);
+        clienteRepo.save(cliente);
     }
 
     @Override
@@ -204,12 +244,12 @@ public class ClienteServicioImpl implements ClienteServicio {
 
         if(cliente.isEmpty())
         {
-            throw new Exception("No se encontró el cliente con id"+clienteId);
+            throw new Exception("No se encontró el cliente con id  "+clienteId);
         }
 
         if(cliente.get().getFavoritos() == null || cliente.get().getFavoritos().isEmpty())
         {
-            throw new Exception("No se encontró el cliente con id"+clienteId);
+            throw new Exception("El cliente no tiene favoritos");
         }
 
         List<String> idFavoritos = cliente.get().getFavoritos().stream()

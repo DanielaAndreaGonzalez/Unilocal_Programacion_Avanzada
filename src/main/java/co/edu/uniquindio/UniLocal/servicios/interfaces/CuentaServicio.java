@@ -10,7 +10,7 @@ public interface CuentaServicio {
 
     void enviarLinkRecuperacion(String email) throws Exception;
 
-    void recuperarPassword(RecuperacionPasswordDTO RecuperacionPasswordDTO);
+    void recuperarPassword(RecuperacionPasswordDTO RecuperacionPasswordDTO)throws Exception;
 
     void cambiarPassword(CambioPasswordDTO cambioPasswordDTO)throws Exception;
 

@@ -125,4 +125,38 @@ public class ClienteController {
             return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error al listar los comentarios"));
         }
     }
+
+    @PostMapping("/cambiar-password")
+    public ResponseEntity<MensajeDTO<String>> cambiarPassword(@RequestBody CambioPasswordDTO cambioPasswordDTO)
+    {
+        try {
+            clienteServicio.cambiarPassword(cambioPasswordDTO);
+            return ResponseEntity.ok().body(new MensajeDTO<>(false,"Cambio de contraseña exitoso" ));
+
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error no se pudo cambiar la contraseña"));
+        }
+    }
+
+    @PostMapping("/recuperar-password")
+    public ResponseEntity<MensajeDTO<String>> recuperarPassword(@RequestBody RecuperacionPasswordDTO recuperacionPasswordDTO)
+    {
+        try {
+            clienteServicio.recuperarPassword(recuperacionPasswordDTO);
+            return ResponseEntity.ok().body(new MensajeDTO<>(false,"Cambio de contraseña exitoso" ));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error no se pudo recuperar la contraseña"));
+        }
+    }
+
+
+    @GetMapping("/calcular-promedio-calificaciones/{codigoNegocio}")
+    public ResponseEntity<MensajeDTO<Double>> calcularPromedioCalificaciones(@PathVariable String codigoNegocio) {
+        try {
+            return ResponseEntity.ok().body(new MensajeDTO<>(false, comentarioServicio.calcularPromedioCalificaciones(codigoNegocio)));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, 0.0));
+        }
+    }
+
 }

@@ -24,4 +24,12 @@ public interface ComentarioRepo extends MongoRepository<Comentario, String> {
             "{ $project: { codigoComentario: '$_id', mensaje: 1, respuesta: 1, nombrecliente: '$cliente.nombre', fotoCliente: '$cliente.fotoPerfil' } }"
     })*/
     List<ItemComentarioDTO> findComentariosByNegocioId(String codigoNegocio);
+
+
+    //calcular promedio calificación negocio
+    @Aggregation(pipeline = {
+            "{ '$match': { 'codigoNegocio': ?0 } }",
+            "{ '$group': { '_id': null, 'avg': { '$avg': '$calificacion' } } }"
+    })
+    Double calcularPromedioCalificacionNegocio(String codigoNegocio);
 }

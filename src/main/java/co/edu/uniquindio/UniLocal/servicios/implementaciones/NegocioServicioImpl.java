@@ -1,10 +1,12 @@
 package co.edu.uniquindio.UniLocal.servicios.implementaciones;
+import co.edu.uniquindio.UniLocal.documentos.Cliente;
 import co.edu.uniquindio.UniLocal.documentos.Negocio;
 import co.edu.uniquindio.UniLocal.dto.*;
 import co.edu.uniquindio.UniLocal.entidades.Ubicacion;
 import co.edu.uniquindio.UniLocal.enums.EstadoNegocio;
 import co.edu.uniquindio.UniLocal.enums.TipoNegocio;
 import co.edu.uniquindio.UniLocal.excepciones.ResourceNotFoundException;
+import co.edu.uniquindio.UniLocal.repositorio.ClienteRepo;
 import co.edu.uniquindio.UniLocal.repositorio.NegocioRepo;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.NegocioServicio;
 import co.edu.uniquindio.UniLocal.utils.NegocioUtils;
@@ -19,8 +21,12 @@ public class NegocioServicioImpl implements NegocioServicio {
 
     private final NegocioRepo negocioRepo;
 
-    public NegocioServicioImpl(NegocioRepo negocioRepo) {
+    private final ClienteRepo clienteRepo;
+
+    public NegocioServicioImpl(NegocioRepo negocioRepo, ClienteRepo clienteRepo) {
+
         this.negocioRepo = negocioRepo;
+        this.clienteRepo = clienteRepo;
     }
 
     @Override
@@ -82,23 +88,25 @@ public class NegocioServicioImpl implements NegocioServicio {
     }
 
     @Override
-    public void listarNegociosUsuario() {
+    public List<NegocioDTO> listarNegociosUsuario(String codigoCliente) throws Exception{
 
+        Optional <Cliente> clienteoptional =  clienteRepo.findById(codigoCliente);
+        if (clienteoptional.isEmpty()){
+            throw new Exception("El cliente no existe");
+        }
+        List<Negocio> negociosUsuario = negocioRepo.findByCodigoCliente(codigoCliente);
+
+        return NegocioUtils.convertirListaNegocioAListaNegocioDto(negociosUsuario);
     }
 
     @Override
-    public void listarNegociosPorEstado() {
+    public  List<NegocioDTO> listarNegociosPorEstado(EstadoNegocio estadoNegocio) throws Exception{
 
-    }
-
-    @Override
-    public void cambiarEstado() {
-
-    }
-
-    @Override
-    public void registrarRevision() {
-
+        List<Negocio> negociosEncontrados = negocioRepo.findByEstado(estadoNegocio);
+        if (negociosEncontrados.isEmpty()){
+            throw new Exception("No se encontraron negocios con dicho estado");
+        }
+        return NegocioUtils.convertirListaNegocioAListaNegocioDto(negociosEncontrados);
     }
 
     @Override
@@ -128,11 +136,15 @@ public class NegocioServicioImpl implements NegocioServicio {
         return NegocioUtils.convertirANegocioDTO(negocioEncontrado.get());
     }
 
-    private Negocio obtenerNegocioPorId(String idNegocio) throws ResourceNotFoundException {
+    @Override
+    public Negocio obtenerNegocioPorId(String idNegocio) throws ResourceNotFoundException {
         Optional<Negocio> optionalNegocio = negocioRepo.findById(idNegocio);
         if (optionalNegocio.isEmpty()) {
             throw new ResourceNotFoundException("No se encontró el negocio con id: " + idNegocio);
         }
         return optionalNegocio.get();
     }
+
+
+
 }

@@ -96,7 +96,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     }
 
     @Override
-    public void calcularPromedioCalificaciones() {
-
+    public double calcularPromedioCalificaciones(String codigoNegocio) {
+        return comentarioRepo.calcularPromedioCalificacionNegocio(codigoNegocio);
     }
 }

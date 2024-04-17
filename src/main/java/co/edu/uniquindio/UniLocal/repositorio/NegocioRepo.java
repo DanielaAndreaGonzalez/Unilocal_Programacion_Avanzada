@@ -36,4 +36,6 @@ public interface NegocioRepo extends MongoRepository<Negocio, String> {
     })
     Optional<Negocio> findByUbicacion(Ubicacion ubicacion, EstadoNegocio estadoNegocio);
 
+    List<Negocio> findByCodigoCliente(String codigoCliente);
+
 }

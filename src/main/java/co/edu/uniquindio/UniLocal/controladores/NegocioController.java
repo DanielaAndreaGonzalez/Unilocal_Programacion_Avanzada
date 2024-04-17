@@ -2,6 +2,7 @@ package co.edu.uniquindio.UniLocal.controladores;
 
 import co.edu.uniquindio.UniLocal.dto.*;
 import co.edu.uniquindio.UniLocal.entidades.Ubicacion;
+import co.edu.uniquindio.UniLocal.enums.EstadoNegocio;
 import co.edu.uniquindio.UniLocal.enums.TipoNegocio;
 import co.edu.uniquindio.UniLocal.excepciones.ResourceNotFoundException;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.NegocioServicio;
@@ -71,5 +72,14 @@ public class NegocioController {
     @GetMapping("/obtener-por-ubicacion")
     public ResponseEntity<MensajeDTO<NegocioDTO>> obtenerNegocioPorUbicacion(@RequestBody Ubicacion ubicacion) throws Exception {
         return ResponseEntity.ok().body(new MensajeDTO<>(false, negocioServicio.obtenerNegocioPorUbicacion(ubicacion)));
+    }
+
+    @GetMapping("/listar-negocios-usuario/{codigoCliente}")
+    public ResponseEntity<MensajeDTO<List<NegocioDTO>>> listarNegociosUsuario(@PathVariable String codigoCliente) throws Exception {
+        return ResponseEntity.ok().body(new MensajeDTO<>(false, negocioServicio.listarNegociosUsuario(codigoCliente)));
+    }
+    @GetMapping("/listar-negocios-por-estado/{estadoNegocio}")
+    public ResponseEntity<MensajeDTO<List<NegocioDTO>>> listarNegociosPorEstado(@PathVariable EstadoNegocio estadoNegocio) throws Exception {
+        return ResponseEntity.ok().body(new MensajeDTO<>(false, negocioServicio.listarNegociosPorEstado(estadoNegocio)));
     }
 }

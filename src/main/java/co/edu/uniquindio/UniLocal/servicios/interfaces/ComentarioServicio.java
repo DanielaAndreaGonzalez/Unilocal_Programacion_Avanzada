@@ -14,5 +14,5 @@ public interface ComentarioServicio {
 
     void responderComentario(RespuestaComentarioDTO respuestaComentarioDTO);
 
-    void calcularPromedioCalificaciones();
+    double calcularPromedioCalificaciones(String codigoNegocio);
 }
