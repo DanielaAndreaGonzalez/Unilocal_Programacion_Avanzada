@@ -39,7 +39,6 @@ public class FiltroToken extends OncePerRequestFilter {
 
             String requestURI = request.getRequestURI();
 
-
             //Se obtiene el token de la petición del encabezado del mensaje HTTP
             String token = getToken(request);
             boolean error = true;
@@ -81,6 +80,26 @@ public class FiltroToken extends OncePerRequestFilter {
                 }else{
                     error=false;
                 }
+
+                if(requestURI.startsWith("/api/moderador")){
+                    if(token!= null){
+                        Jws<Claims> jws = jwtUtils.parseJwt(token);
+                        if(!jws.getPayload().get("rol").equals("MODERADOR")){
+                            crearRespuestaError("No tiene permisos para acceder a este recurso",
+                                    HttpServletResponse.SC_FORBIDDEN,response);
+                        }else{
+                            error = false;
+                        }
+                    }else{
+                        crearRespuestaError("No tiene permisos para acceder a este recurso",
+                                HttpServletResponse.SC_FORBIDDEN, response);
+                    }
+                }else{
+                    error=false;
+                }
+
+
+
             }catch (MalformedJwtException | SignatureException e){
                     crearRespuestaError("El token es incorrecto",HttpServletResponse.SC_INTERNAL_SERVER_ERROR,response);
             }catch (ExpiredJwtException e){

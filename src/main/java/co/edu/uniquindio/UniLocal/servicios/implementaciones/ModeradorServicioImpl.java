@@ -15,7 +15,12 @@ import co.edu.uniquindio.UniLocal.repositorio.ModeradorRepo;
 import co.edu.uniquindio.UniLocal.repositorio.NegocioRepo;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.EmailServicio;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ModeradorServicio;
+import co.edu.uniquindio.UniLocal.utils.JWTUtils;
 import co.edu.uniquindio.UniLocal.utils.NegocioUtils;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,13 +37,16 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     private final HistorialModeracionRepo historialModeracionRepo;
     private final ModeradorRepo moderadorRepo;
     private final ClienteRepo clienteRepo;
+
+    private final JWTUtils jwtUtils;
     public ModeradorServicioImpl(NegocioRepo negocioRepo, EmailServicio emailServicio,HistorialModeracionRepo historialModeracionRepo,ModeradorRepo moderadorRepo
-                                 ,ClienteRepo clienteRepo){
+                                 ,ClienteRepo clienteRepo, JWTUtils jwtUtils){
         this.negocioRepo = negocioRepo;
         this.emailServicio = emailServicio;
         this.historialModeracionRepo = historialModeracionRepo;
         this.moderadorRepo = moderadorRepo;
         this.clienteRepo = clienteRepo;
+        this.jwtUtils = jwtUtils;
     }
     @Override
     public void eliminarCuenta(String idCuenta) throws Exception {
@@ -72,7 +80,33 @@ public class ModeradorServicioImpl implements ModeradorServicio {
 
     @Override
     public void cambiarPassword(CambioPasswordDTO cambioPasswordDTO) throws Exception {
+        // Extraer y validar el token
+        Jws<Claims> claimsJws;
+        try {
+            claimsJws = jwtUtils.parseJwt(cambioPasswordDTO.token());
+        } catch (JwtException e) {
+            throw new Exception("Token inválido o expirado", e);
+        }
+        // Obtener el email del cuerpo del token (subject del token)
+        String email = claimsJws.getBody().getSubject();
+        if (email == null || email.isEmpty()) {
+            throw new Exception("El token no contiene el email del usuario");
+        }
 
+        // Verificar que el email extraído del token coincida con el ID (email) del cambioPasswordDTO
+        if (!email.equals(cambioPasswordDTO.codigoCliente())) {
+            throw new Exception("El email del token no coincide con la solicitud de cambio de contraseña");
+        }
+
+        Optional<Moderador> moderadorEncontrado = moderadorRepo.findByEmail(email);
+        Moderador moderador = moderadorEncontrado.orElseThrow(() -> new Exception("Moderador no encontrado"));
+
+        // Hash de la nueva contraseña
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String nuevaPasswordEncriptada = passwordEncoder.encode(cambioPasswordDTO.passwordNueva());
+
+        moderador.setPassword(nuevaPasswordEncriptada);
+        moderadorRepo.save(moderador);
     }
 
     @Override

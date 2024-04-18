@@ -47,7 +47,7 @@ public class ClienteServicioTest {
         emailServicio.enviarCorreo(new EmailDTO(
                 "Prueba",
                 "Prueba desde UniLocal ",
-                "luisacahe5@gmail.com"
+                "danielaandreagonzalezhenao@gmail.com"
         ));
     }
 
@@ -55,8 +55,18 @@ public class ClienteServicioTest {
     public void autenticacionTest() throws Exception{
 
         autenticacionServicio.iniciarioSesionCliente(new LoginDTO(
-                "juan@email.com",
-                "123"
+                "danielaandreagonzalezhenao@gmail.com",
+                "kevin123456"
+        ));
+
+    }
+
+    @Test
+    public void autenticacionTestModerador() throws Exception{
+
+        autenticacionServicio.iniciarSesionModerador(new LoginDTO(
+                "narvaezkevin82@gmail.com",
+                "kevin123456"
         ));
 
     }
