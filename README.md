@@ -6,25 +6,21 @@ Proyecto final de programación avanzada
 <img src="[https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuq0K8Nk2_AUSWsvqJCkL5Z_Z7m8_CfhFdIg&usqp=CAU](https://www.armadilloamarillo.com/wp-content/uploads/spring-boot-ok.png)" width="100" alt="accessibility text">
 
 
-
-
 Proyecto en Framework Spring Boot, el cual tiene como objetivo programar los servicios necesarios para el funcionamiento de la plataforma unilocal
 
+<img src="https://cms.rootstack.com/sites/default/files/inline-images/java1_1.png" width="100" alt="accessibility text">
 
-
-
-<img src="[https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2019/09/10-parques-atracciones-espectaculares-mundo-puedes-visitar_10.jpg" width="100" alt="accessibility text](https://www.google.com/url?sa=i&url=https%3A%2F%2Frootstack.com%2Fes%2Fblog%2Fjava-tips-cinco-consejos-para-desarrollar-con-este-lenguaje-de-programacion&psig=AOvVaw04tuNtSkI1BVDow8Sys2Ak&ust=1713551281613000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIjGlI6yzIUDFQAAAAAdAAAAABAE)">
 
 ****************************************************************************************************************************************************
 # Objetivos
 
-* Aplicar conceptos de programación orientada a objetos
+* Aplicar conceptos de programación vistas en clase
 * Implementar persistencia de datos
 * Implementar framework como soporte para el backend
 * Implementar Bases de datos no relacionales con MongoDB
 *****************************************************************************************************************************************************
-<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fes.m.wikipedia.org%2Fwiki%2FArchivo%3AMongoDB_Logo.svg&psig=AOvVaw1ftSotx6hcybryDypublOc&ust=1713551336745000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKiPuaeyzIUDFQAAAAAdAAAAABAE">
 
+<img src="[https://cms.rootstack.com/sites/default/files/inline-images/java1_1.png](https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/2560px-MongoDB_Logo.svg.png)" width="100" alt="accessibility text">
 
 # Tecnologías
 ******************************************************************************************************************************************************
