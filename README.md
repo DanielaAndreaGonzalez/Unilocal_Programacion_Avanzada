@@ -1,4 +1,3 @@
-![image](https://github.com/DanielaAndreaGonzalez/Unilocal_Programacion_Avanzada/assets/67668910/6f7bac2a-3926-494f-ad5b-764552a4109d)
 # UNILOCAL PROYECTO
 Proyecto final de programación avanzada
 
