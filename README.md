@@ -1,12 +1,16 @@
-
-
-<img src="https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FSpring_Boot&psig=AOvVaw0czSy5S3UMsCt0DXdFN49j&ust=1713551026305000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLDs4JexzIUDFQAAAAAdAAAAABAE">
-
+![image](https://github.com/DanielaAndreaGonzalez/Unilocal_Programacion_Avanzada/assets/67668910/6f7bac2a-3926-494f-ad5b-764552a4109d)
 # UNILOCAL PROYECTO
 Proyecto final de programación avanzada
 
 
+<img src="[https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuq0K8Nk2_AUSWsvqJCkL5Z_Z7m8_CfhFdIg&usqp=CAU](https://www.armadilloamarillo.com/wp-content/uploads/spring-boot-ok.png)" width="100" alt="accessibility text">
+
+
+
+
 Proyecto en Framework Spring Boot, el cual tiene como objetivo programar los servicios necesarios para el funcionamiento de la plataforma unilocal
+
+
 
 
 <img src="[https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2019/09/10-parques-atracciones-espectaculares-mundo-puedes-visitar_10.jpg" width="100" alt="accessibility text](https://www.google.com/url?sa=i&url=https%3A%2F%2Frootstack.com%2Fes%2Fblog%2Fjava-tips-cinco-consejos-para-desarrollar-con-este-lenguaje-de-programacion&psig=AOvVaw04tuNtSkI1BVDow8Sys2Ak&ust=1713551281613000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIjGlI6yzIUDFQAAAAAdAAAAABAE)">
