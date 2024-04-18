@@ -2,12 +2,12 @@
 Proyecto final de programación avanzada
 
 
-<img src="https://cms.rootstack.com/sites/default/files/inline-images/spring-boot.png" width="100" alt="accessibility text">
+<img src="https://cms.rootstack.com/sites/default/files/inline-images/spring-boot.png" width="200" alt="accessibility text">
 
 
 Proyecto en Framework Spring Boot, el cual tiene como objetivo programar los servicios necesarios para el funcionamiento de la plataforma unilocal
 
-<img src="https://cms.rootstack.com/sites/default/files/inline-images/java1_1.png" width="100" alt="accessibility text">
+<img src="https://cms.rootstack.com/sites/default/files/inline-images/java1_1.png" width="150" alt="accessibility text">
 
 
 ****************************************************************************************************************************************************
@@ -19,7 +19,7 @@ Proyecto en Framework Spring Boot, el cual tiene como objetivo programar los ser
 * Implementar Bases de datos no relacionales con MongoDB
 *****************************************************************************************************************************************************
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/512px-MongoDB_Logo.svg.png" width="100" alt="accessibility text">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/512px-MongoDB_Logo.svg.png" width="150" alt="accessibility text">
 
 # Tecnologías
 ******************************************************************************************************************************************************
@@ -38,6 +38,11 @@ Para la persistencia de datos se utilizó MongoDB Bases de datos NoSQL
 
 Para el correcto funcionamiento se utilizó la herramienta POSTMAN (> https://openwebinars.net/blog/que-es-postman/ ) 
 para las peticiones get, post, put, delete...etc. del proyecto. Version: 9.24
+
+
+<img src="https://www.aluracursos.com/blog/assets/postman/img1-portada.png" width="150" alt="accessibility text">
+
+
 ****************************************************************************************************************************************************
 # Instalación
 
