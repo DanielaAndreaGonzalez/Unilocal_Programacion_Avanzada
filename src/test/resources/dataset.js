@@ -241,7 +241,7 @@ db.moderador.insertMany([
         nombre: 'Leidy',
         cedula: "51992345",
         nickname: 'Moderador 3',
-        email: 'leidy@email.com',
+        email: 'lyriveraq@uqvirtual.edu.co',
         password: '123456',
         estado: 'ACTIVO',
         fotoPerfil: 'fotomoderador3.png',

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.UniLocal.servicios.interfaces;
 
 
+import co.edu.uniquindio.UniLocal.documentos.Cliente;
 import co.edu.uniquindio.UniLocal.dto.*;
 import co.edu.uniquindio.UniLocal.enums.TipoNegocio;
 import co.edu.uniquindio.UniLocal.excepciones.ExcepcionesGlobales;
@@ -25,4 +26,6 @@ public interface ClienteServicio extends CuentaServicio{
     boolean agregarAFavoritos(NegocioFavoritoDTO negocioFavoritoDTO) throws Exception;
     boolean quitarDeFavoritos(NegocioFavoritoDTO negocioFavoritoDTO) throws Exception;
     List<NegocioDTO> listarNegociosFavoritos(String clienteId) throws Exception;
+
+    Cliente obtenerClienteporId(String idCliente);
 }

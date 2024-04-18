@@ -3,6 +3,8 @@ package co.edu.uniquindio.UniLocal.Test;
 import co.edu.uniquindio.UniLocal.documentos.Cliente;
 import co.edu.uniquindio.UniLocal.documentos.Negocio;
 import co.edu.uniquindio.UniLocal.dto.*;
+import co.edu.uniquindio.UniLocal.enums.EstadoNegocio;
+import co.edu.uniquindio.UniLocal.enums.EstadoRegistro;
 import co.edu.uniquindio.UniLocal.repositorio.ClienteRepo;
 import co.edu.uniquindio.UniLocal.repositorio.NegocioRepo;
 import co.edu.uniquindio.UniLocal.servicios.implementaciones.EmailServicioImpl;
@@ -108,9 +110,13 @@ public class ClienteServicioTest {
     @Test
     public void eliminarTest() throws Exception{
 //Se elimina el cliente con el id "Cliente1"
-        clienteServicio.eliminarCliente("Cliente1");
+        String idCliente = "Cliente1";
+        clienteServicio.eliminarCliente(idCliente);
+        Cliente cliente = clienteServicio.obtenerClienteporId(idCliente);
 //Al intentar obtener el cliente con el id "Cliente1" se debe lanzar una excepción
-        Assertions.assertThrows(Exception.class, () -> clienteServicio.obtenerCliente("Cliente1") );
+        //Assertions.assertThrows(Exception.class, () -> clienteServicio.obtenerCliente("Cliente1") );
+
+        assertEquals(EstadoRegistro.INACTIVO, cliente.getEstado());
     }
 
     @Test

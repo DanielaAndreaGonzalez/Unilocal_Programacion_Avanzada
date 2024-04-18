@@ -266,6 +266,12 @@ public class ClienteServicioImpl implements ClienteServicio {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Cliente obtenerClienteporId(String idCliente) {
+        Optional <Cliente> clienteOptional =  clienteRepo.findById(idCliente);
+        return clienteOptional.get();
+    }
+
     private Cliente obtenerClientePorIdCuenta(String idCuenta)throws ResourceNotFoundException
     {
         Optional<Cliente> optionalCliente = clienteRepo.findById(idCuenta);
