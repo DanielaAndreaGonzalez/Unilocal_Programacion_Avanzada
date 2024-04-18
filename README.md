@@ -20,7 +20,7 @@ Proyecto en Framework Spring Boot, el cual tiene como objetivo programar los ser
 * Implementar Bases de datos no relacionales con MongoDB
 *****************************************************************************************************************************************************
 
-<img src="[https://cms.rootstack.com/sites/default/files/inline-images/java1_1.png](https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/2560px-MongoDB_Logo.svg.png)" width="100" alt="accessibility text">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/512px-MongoDB_Logo.svg.png" width="100" alt="accessibility text">
 
 # Tecnologías
 ******************************************************************************************************************************************************
