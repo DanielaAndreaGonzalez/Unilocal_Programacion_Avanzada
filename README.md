@@ -50,7 +50,13 @@ para las peticiones get, post, put, delete...etc. del proyecto. Version: 9.24
 2. Proceder a instalar cada una de ellas
 3. Clonar o descargar el proyecto desde la rama 'main'
 4. Importar el proyecto desde spring tools, Intelligent o editor de preferencia
+5. Tener instalado Docker
+ 
+<img src="https://axarnet.es/images/blog/que-es-el-docker-axarnet.jpg" width="150" alt="accessibility text">
 
 ****************************************************************************************************************************************************
 
-Ejecutar en local: http://localhost:4200/atracciones
+Ejecutar en local con mongoDB -> http://localhost:8081/db/unilocal-proyecto-final/
+
+
+*****************************************************************************************************************************************************
