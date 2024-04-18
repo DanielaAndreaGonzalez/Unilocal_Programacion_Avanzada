@@ -60,7 +60,6 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     private Comentario crearComentarioDesdeItemComentarioDto(RegistroComentarioDTO registroComentarioDTO) {
         Comentario comentario = new Comentario();
         comentario.setMensaje(registroComentarioDTO.mensaje());
-        comentario.setRespuesta(registroComentarioDTO.respuesta());
         comentario.setCodigoCliente(registroComentarioDTO.codigoCliente());
         comentario.setCodigoNegocio(registroComentarioDTO.codigoNegocio());
         comentario.setFecha(registroComentarioDTO.fechaRegistro());
