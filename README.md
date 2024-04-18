@@ -2,7 +2,7 @@
 Proyecto final de programación avanzada
 
 
-<img src="[https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuq0K8Nk2_AUSWsvqJCkL5Z_Z7m8_CfhFdIg&usqp=CAU](https://www.armadilloamarillo.com/wp-content/uploads/spring-boot-ok.png)" width="100" alt="accessibility text">
+<img src="https://cms.rootstack.com/sites/default/files/inline-images/spring-boot.png" width="100" alt="accessibility text">
 
 
 Proyecto en Framework Spring Boot, el cual tiene como objetivo programar los servicios necesarios para el funcionamiento de la plataforma unilocal
