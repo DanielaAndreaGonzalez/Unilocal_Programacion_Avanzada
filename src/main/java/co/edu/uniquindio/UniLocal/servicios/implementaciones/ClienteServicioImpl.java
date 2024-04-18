@@ -140,10 +140,14 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public List<NegocioDTO> obtenerNegociosMejorCalificados(TipoNegocio tipoNegocio) throws Exception {
         List<Negocio>  negociosMejorCalificaciones = negocioRepo.findNegociosMejorCalificacion(tipoNegocio);
+        List<NegocioDTO> negocioDTOList = new ArrayList<>();
+        negociosMejorCalificaciones.forEach(negocio -> {
+            negocioDTOList.add(NegocioUtils.convertirANegocioDTO(negocioRepo.findById(negocio.getCodigo()).get()));
+        });
         if(negociosMejorCalificaciones.isEmpty()){
             throw new Exception("No se encontraron negocios");
         }
-        return NegocioUtils.convertirListaNegocioAListaNegocioDto( negociosMejorCalificaciones);
+        return negocioDTOList;
     }
 
     @Override

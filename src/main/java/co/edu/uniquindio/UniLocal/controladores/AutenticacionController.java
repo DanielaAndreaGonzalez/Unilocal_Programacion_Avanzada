@@ -50,4 +50,6 @@ public class AutenticacionController {
         return ResponseEntity.ok().body(new MensajeDTO<>(false, "Cliente registrado correctamente"));
     }
 
+
+
 }

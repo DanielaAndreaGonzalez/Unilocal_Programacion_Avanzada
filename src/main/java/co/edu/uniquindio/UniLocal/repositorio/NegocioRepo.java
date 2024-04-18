@@ -19,7 +19,7 @@ public interface NegocioRepo extends MongoRepository<Negocio, String> {
     @Aggregation(pipeline = {
             "{ '$match': { 'tipoNegocio': ?0 } }", // Filtra negocios por el enum TipoNegocio
             "{ '$unwind': '$comentarios' }",
-            "{ '$group': { '_id': '$_id', 'nombre': { '$first': '$nombre' }, 'promedioCalificacion': { '$avg': '$comentario.calificacion' } } }",
+            "{ '$group': { '_id': '$_id', 'nombre': { '$first': '$nombre' }, 'promedioCalificacion': { '$avg': '$comentarios.calificacion' } } }",
             "{ '$sort': { 'promedioCalificacion': -1 } }" // Ordena los resultados por calificación promedio en orden descendente
     })
     List<Negocio> findNegociosMejorCalificacion(TipoNegocio tipoNegocio);
