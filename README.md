@@ -42,6 +42,10 @@ para las peticiones get, post, put, delete...etc. del proyecto. Version: 9.24
 
 <img src="https://www.aluracursos.com/blog/assets/postman/img1-portada.png" width="150" alt="accessibility text">
 
+Si se desea probar las APIs en la plataforma POSTMAN, una vez descargada en la opción import 
+se debe de importar el archivo que se encuentra en la carpeta #Archivo Postman
+
+
 
 ****************************************************************************************************************************************************
 # Instalación
