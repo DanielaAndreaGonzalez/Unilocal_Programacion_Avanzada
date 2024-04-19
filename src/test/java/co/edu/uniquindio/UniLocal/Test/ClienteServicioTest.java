@@ -115,7 +115,6 @@ public class ClienteServicioTest {
         Cliente cliente = clienteServicio.obtenerClienteporId(idCliente);
 //Al intentar obtener el cliente con el id "Cliente1" se debe lanzar una excepción
         //Assertions.assertThrows(Exception.class, () -> clienteServicio.obtenerCliente("Cliente1") );
-
         assertEquals(EstadoRegistro.INACTIVO, cliente.getEstado());
     }
 
