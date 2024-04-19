@@ -1,0 +1,1107 @@
+{
+	"info": {
+		"_postman_id": "96284439-c9d4-47b0-b0e6-1a45ba564702",
+		"name": "Unilocal proyecto final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21930671"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login cliente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMjM2NzE1LCJleHAiOjE3MTMyNDAzMTV9.eLNYfCZVVfvkFRQ-hZvT9_Ei44Dye8jde9dF3FUM2oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\":\"narvaezkevin8182@gmail.com\",\r\n    \"password\":\"kevin123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/auth/login-cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"auth",
+								"login-cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Iniciar sesion moderador",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/auth/login-moderador",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login-moderador"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"bestfood\",\r\n    \"nickname\":\"bestfood\",\r\n    \"fotoPerfil\":\"fotobestfood.png\",\r\n    \"email\":\"bestfood@gmail.com\",\r\n    \"password\":\"1234567\",\r\n    \"ciudadResidencia\":\"Armenia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/auth/crear-usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"auth",
+								"crear-usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cambiar password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMjMzMDk3LCJleHAiOjE3MTMyMzY2OTd9.MePpbsitnK8hg7FzbmfFP-Dsg1n4rjpyvvKetBpnu-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passwordNueva\": \"kevin123456\",\r\n    \"codigoCliente\" : \"narvaezkevin8182@gmail.com\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMjMzMDk3LCJleHAiOjE3MTMyMzY2OTd9.MePpbsitnK8hg7FzbmfFP-Dsg1n4rjpyvvKetBpnu-Q\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/clientes/cambiar-password",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"cambiar-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recuperar password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMjMzMDk3LCJleHAiOjE3MTMyMzY2OTd9.MePpbsitnK8hg7FzbmfFP-Dsg1n4rjpyvvKetBpnu-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoSeguridad\" : \"5289\",\r\n    \"nuevaPassword\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/clientes/recuperar-password",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"recuperar-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/clientes/crear-usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"clientes",
+								"crear-usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"\",\r\n    \"nombre\": \"\",\r\n    \"fotoPerfil\": \"\",\r\n    \"email\": \"\",\r\n    \"ciudadREsidencia\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/clientes/editar-perfil",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"editar-perfil"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/clientes/eliminar/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMjMzMDk3LCJleHAiOjE3MTMyMzY2OTd9.MePpbsitnK8hg7FzbmfFP-Dsg1n4rjpyvvKetBpnu-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/clientes/obtener/661c090008b0af2fb61e9ac0",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"obtener",
+								"661c090008b0af2fb61e9ac0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/clientes/listar-todos",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"listar-todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener negocios mejor calificacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6ImJlc3Rmb29kQGdtYWlsLmNvbSIsImlhdCI6MTcxMzEyMTI2OCwiZXhwIjoxNzEzMTI0ODY4fQ.dpIE-4PDSMT7OYvjb3IbVSSLJJmct1FnZp9ZGS3TJGc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/clientes/listar-mejores-calificados/RESTAURANTE",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"listar-mejores-calificados",
+								"RESTAURANTE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar negocios favoritos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMzcyNjI2LCJleHAiOjE3MTMzNzYyMjZ9.Cvv1QyFemB66bEo3oUdl9Hc_31PixqL5atgB7KlBtEI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/clientes/listar-negocios-favoritos/661c090008b0af2fb61e9ac0",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"listar-negocios-favoritos",
+								"661c090008b0af2fb61e9ac0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar a favoritos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMzcyNjI2LCJleHAiOjE3MTMzNzYyMjZ9.Cvv1QyFemB66bEo3oUdl9Hc_31PixqL5atgB7KlBtEI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clienteId\": \"661c090008b0af2fb61e9ac0\",\r\n    \"negocioId\": \"661c7f6b1a6e5165eaf9b538\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/clientes/agregar-favoritos",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"agregar-favoritos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "quitar favoritos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMzcyNjI2LCJleHAiOjE3MTMzNzYyMjZ9.Cvv1QyFemB66bEo3oUdl9Hc_31PixqL5atgB7KlBtEI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clienteId\": \"661c090008b0af2fb61e9ac0\",\r\n    \"negocioId\": \"661c7f6b1a6e5165eaf9b538\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/clientes/quitar-favoritos",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"quitar-favoritos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear comentario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMjM2NzE1LCJleHAiOjE3MTMyNDAzMTV9.eLNYfCZVVfvkFRQ-hZvT9_Ei44Dye8jde9dF3FUM2oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensaje\": \"Cafés deliciosos.\",\r\n    \"codigoCliente\": \"661c090008b0af2fb61e9ac0\",\r\n    \"codigoNegocio\":\"661c7f6b1a6e5165eaf9b538\",\r\n    \"fechaRegistro\": \"2024-04-14\",\r\n    \"calificacion\": 4.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/clientes/crear-comentario",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"crear-comentario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Responder comentario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMTQ0NDk1LCJleHAiOjE3MTMxNDgwOTV9.BZ_xbmSR6h_kns359UhH9CKR6kYUYbHWFe3hsNGX76I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoComentario\": \"661c800c1a6e5165eaf9b53a\",\r\n    \"respuesta\": \"Muchas gracias, me alegra que le haya gustado el pan de bono\"   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/clientes/responder-comentario",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"responder-comentario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar comentarios por negocio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMTQ0NDk1LCJleHAiOjE3MTMxNDgwOTV9.BZ_xbmSR6h_kns359UhH9CKR6kYUYbHWFe3hsNGX76I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/clientes/listar-comentarios-negocio/661c7f6b1a6e5165eaf9b538",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"listar-comentarios-negocio",
+								"661c7f6b1a6e5165eaf9b538"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "calcular promedio calificaciones por negocio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMjM2NzE1LCJleHAiOjE3MTMyNDAzMTV9.eLNYfCZVVfvkFRQ-hZvT9_Ei44Dye8jde9dF3FUM2oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/clientes/calcular-promedio-calificaciones/661c7f6b1a6e5165eaf9b538",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"clientes",
+								"calcular-promedio-calificaciones",
+								"661c7f6b1a6e5165eaf9b538"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negocio",
+			"item": [
+				{
+					"name": "Crear Negocio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMTQwNzkwLCJleHAiOjE3MTMxNDQzOTB9.IYvH6qg651FrcsNkHo1Xpiv_kWCLTmWYZzLsYvjmEAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Pan de coco del valle\",\r\n    \"descripcion\":\"Panaderia y pasteleria Caicedonia\",\r\n    \"imagenes\":[\"pan-de-coco.png\"],\r\n    \"horarios\": [\r\n        {\r\n            \"dia\": \"LUNES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        },\r\n        {\r\n            \"dia\": \"MARTES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        },\r\n        {\r\n            \"dia\": \"MIERCOLES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        },\r\n        {\r\n            \"dia\": \"JUEVES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        },\r\n        {\r\n            \"dia\": \"VIERNES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        },\r\n        {\r\n            \"dia\": \"SABADO\", \"horaInicio\": \"09:00\", \"horaFin\": \"19:00\"\r\n        }\r\n    ],\r\n    \"telefonos\":[\"609545\"],\r\n    \"ubicacion\":{\r\n        \"latitud\": 7.54013,\r\n        \"longitud\": -78.66564\r\n    },\r\n    \"tipoNegocio\":\"PANADERIA\",\r\n    \"codigoCliente\":\"661c090008b0af2fb61e9ac0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/negocio/crear-negocio",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"crear-negocio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMTQwNzkwLCJleHAiOjE3MTMxNDQzOTB9.IYvH6qg651FrcsNkHo1Xpiv_kWCLTmWYZzLsYvjmEAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/negocio/listar-todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"listar-todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Negocio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6ImJlc3Rmb29kQGdtYWlsLmNvbSIsImlhdCI6MTcxMzExMzM5MCwiZXhwIjoxNzEzMTE2OTkwfQ.-u1T12jFgTfYr6OwAzvEqHhsVzkpqIavmPeYYMtsnBk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"661c09d408b0af2fb61e9ac1\",\r\n    \"nombre\":\"Best Food\",\r\n    \"descripcion\":\"Comida rapida para todos los gustos\",\r\n    \"imagenes\":[\"best-food.png\", \"best-food-2.png\"],\r\n    \"horarios\": [\r\n        {\r\n            \"dia\": \"LUNES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        },\r\n        {\r\n            \"dia\": \"MARTES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        },\r\n        {\r\n            \"dia\": \"MIERCOLES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        },\r\n        {\r\n            \"dia\": \"JUEVES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        },\r\n        {\r\n            \"dia\": \"VIERNES\", \"horaInicio\": \"08:00\", \"horaFin\": \"20:00\"\r\n        }\r\n    ],\r\n    \"telefonos\":[\"31454567\",\"3123121\"],\r\n    \"ubicacion\":{\r\n        \"latitud\": 4.54013,\r\n        \"longitud\": -75.66566\r\n    },\r\n    \"tipoNegocio\":\"RESTAURANTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/negocio/editar-negocio",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"editar-negocio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6ImJlc3Rmb29kQGdtYWlsLmNvbSIsImlhdCI6MTcxMzExNzE0OSwiZXhwIjoxNzEzMTIwNzQ5fQ.tP7vlXBDjkPwmDSi2Vdl03KnI5XHiSY2KDE15vxp1Oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/negocio/obtener/661c09d408b0af2fb61e9ac1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"obtener",
+								"661c09d408b0af2fb61e9ac1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Negocio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6ImJlc3Rmb29kQGdtYWlsLmNvbSIsImlhdCI6MTcxMzExNzE0OSwiZXhwIjoxNzEzMTIwNzQ5fQ.tP7vlXBDjkPwmDSi2Vdl03KnI5XHiSY2KDE15vxp1Oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/negocio/eliminar/661c09d408b0af2fb61e9ac1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"eliminar",
+								"661c09d408b0af2fb61e9ac1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por nombre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6ImJlc3Rmb29kQGdtYWlsLmNvbSIsImlhdCI6MTcxMzExNzE0OSwiZXhwIjoxNzEzMTIwNzQ5fQ.tP7vlXBDjkPwmDSi2Vdl03KnI5XHiSY2KDE15vxp1Oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/negocio/obtener-por-nombre/Restaurante%20Mexicano",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"obtener-por-nombre",
+								"Restaurante%20Mexicano"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por tipo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6ImJlc3Rmb29kQGdtYWlsLmNvbSIsImlhdCI6MTcxMzExNzE0OSwiZXhwIjoxNzEzMTIwNzQ5fQ.tP7vlXBDjkPwmDSi2Vdl03KnI5XHiSY2KDE15vxp1Oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/negocio/obtener-por-tipo-negocio/RESTAURANTE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"obtener-por-tipo-negocio",
+								"RESTAURANTE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ubicacion",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6ImJlc3Rmb29kQGdtYWlsLmNvbSIsImlhdCI6MTcxMzExNzE0OSwiZXhwIjoxNzEzMTIwNzQ5fQ.tP7vlXBDjkPwmDSi2Vdl03KnI5XHiSY2KDE15vxp1Oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"latitud\": 5.54013,\r\n    \"longitud\": -75.66566\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/api/negocio/obtener-por-ubicacion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"obtener-por-ubicacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Negocios por Estado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMjM2NzE1LCJleHAiOjE3MTMyNDAzMTV9.eLNYfCZVVfvkFRQ-hZvT9_Ei44Dye8jde9dF3FUM2oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/negocio/listar-negocios-por-estado/APROBADO",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"listar-negocios-por-estado",
+								"APROBADO"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener  Negocios por Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMjM2NzE1LCJleHAiOjE3MTMyNDAzMTV9.eLNYfCZVVfvkFRQ-hZvT9_Ei44Dye8jde9dF3FUM2oc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/negocio/listar-negocios-usuario/661c090008b0af2fb61e9ac0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"negocio",
+								"listar-negocios-usuario",
+								"661c090008b0af2fb61e9ac0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Moderados",
+			"item": [
+				{
+					"name": "Obtener negocios pendientes por autorizar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/moderador/obtener-lugares-pendientes-autorizar",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"moderador",
+								"obtener-lugares-pendientes-autorizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Autorizar negocio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoNegocio\":\"661c7f6b1a6e5165eaf9b538\",\r\n    \"clienteId\":\"661c090008b0af2fb61e9ac0\",\r\n    \"observacion\":\"Autorizado\",\r\n    \"moderadorId\":\"661c42d6f95307ec13592465\",\r\n    \"fechaAccion\":\"2024-04-14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/moderador/autorizar-negocio",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"moderador",
+								"autorizar-negocio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rechazar negocio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MWMwOTAwMDhiMGFmMmZiNjFlOWFjMCIsIm5vbWJyZSI6ImJlc3Rmb29kIiwicm9sIjoiQ0xJRU5URSIsInN1YiI6Im5hcnZhZXprZXZpbjgxODJAZ21haWwuY29tIiwiaWF0IjoxNzEzMzk5ODMwLCJleHAiOjE3MTM0MDM0MzB9.u4tE9r5H0fI-D05LvXJI02yXGgQZ_4Od54z3fqtcEAo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoNegocio\":\"662027d6ccd5a10396f1550e\",\r\n    \"clienteId\":\"661c090008b0af2fb61e9ac0\",\r\n    \"observacion\":\"Rechazado\",\r\n    \"moderadorId\":\"661c42d6f95307ec13592465\",\r\n    \"fechaAccion\":\"2024-04-17\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/moderador/rechazar-negocio",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"moderador",
+								"rechazar-negocio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener historico lugares autorizados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/moderador/obtener-historico-lugares-autorizados/661c42d6f95307ec13592465",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"moderador",
+								"obtener-historico-lugares-autorizados",
+								"661c42d6f95307ec13592465"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener historico luegares rechazados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/moderador/obtener-historico-lugares-rechazados/661c42d6f95307ec13592465",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"moderador",
+								"obtener-historico-lugares-rechazados",
+								"661c42d6f95307ec13592465"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Imagen",
+			"item": [
+				{
+					"name": "Subir imagen",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/D:/Imagenes/nvae-tripulada.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9090/api/imagenes/subir",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"imagenes",
+								"subir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
