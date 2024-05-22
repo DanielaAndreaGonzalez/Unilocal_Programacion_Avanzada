@@ -12,7 +12,7 @@ RUN chmod +x gradlew
 # Copy the application source code
 COPY src/ ./src/
 # Build the application using Gradle
-RUN ./gradlew build
+RUN ./gradlew build --stacktrace --info
 # Set the port to expose
 EXPOSE ${PORT}
 # Set the entry point to run the application
