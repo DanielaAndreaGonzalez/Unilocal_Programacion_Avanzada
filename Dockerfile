@@ -7,6 +7,8 @@ COPY build.gradle .
 COPY settings.gradle .
 COPY gradlew .
 COPY gradle/ ./gradle/
+# Make gradlew executable
+RUN chmod +x gradlew
 # Copy the application source code
 COPY src/ ./src/
 # Build the application using Gradle
