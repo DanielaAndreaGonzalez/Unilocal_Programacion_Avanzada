@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
 import java.util.List;
 
 public record ActualizarNegocioDTO (
-        @NotBlank String id,
+        @NotBlank String codigo,
         //Ejemplo de restriccion numerica
         //@Max(100) @Min(0) int edad
         @NotBlank @Length(max = 100) String nombre,

@@ -59,8 +59,6 @@ public class FiltroToken extends OncePerRequestFilter {
                         crearRespuestaError("No tiene permisos para acceder a este recurso",
                                 HttpServletResponse.SC_FORBIDDEN, response);
                     }
-                }else{
-                    error=false;
                 }
                 //Agregar más validaciones para otros roles y recursos(rutas de la API) aquí
 
@@ -77,8 +75,6 @@ public class FiltroToken extends OncePerRequestFilter {
                         crearRespuestaError("No tiene permisos para acceder a este recurso",
                                 HttpServletResponse.SC_FORBIDDEN, response);
                     }
-                }else{
-                    error=false;
                 }
 
                 if(requestURI.startsWith("/api/moderador")){
@@ -94,8 +90,10 @@ public class FiltroToken extends OncePerRequestFilter {
                         crearRespuestaError("No tiene permisos para acceder a este recurso",
                                 HttpServletResponse.SC_FORBIDDEN, response);
                     }
-                }else{
-                    error=false;
+                }
+
+                if (requestURI.startsWith("/api/auth") || requestURI.startsWith("/api/publico")){
+                    error = false;
                 }
 
 
@@ -123,13 +121,14 @@ public class FiltroToken extends OncePerRequestFilter {
 
     private void crearRespuestaError(String mensaje, int codigoError, HttpServletResponse response)
         throws IOException{
-
-        MensajeDTO<String> dto = new MensajeDTO<>(true,mensaje);
-        response.setContentType("application/json");
-        response.setStatus(codigoError);
-        response.getWriter().write(new ObjectMapper().writeValueAsString(dto));
-        response.getWriter().flush();
-        response.getWriter().close();
+        if (!response.isCommitted()) { // Solo escribir si la respuesta no se ha comprometido
+            MensajeDTO<String> dto = new MensajeDTO<>(true, mensaje);
+            response.setContentType("application/json;charset=UTF-8");
+            response.setStatus(codigoError);
+            response.getWriter().write(new ObjectMapper().writeValueAsString(dto));
+            response.getWriter().flush();
+            response.getWriter().close();
+        }
     }
 
 

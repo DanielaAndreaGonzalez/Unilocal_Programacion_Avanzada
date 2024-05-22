@@ -52,7 +52,7 @@ public class NegocioServicioImpl implements NegocioServicio {
 
     @Override
     public void actualizarNegocio(ActualizarNegocioDTO actualizarNegocioDTO) throws ResourceNotFoundException {
-        Negocio negocio = obtenerNegocioPorId(actualizarNegocioDTO.id());
+        Negocio negocio = obtenerNegocioPorId(actualizarNegocioDTO.codigo());
         negocio.setImagenes(actualizarNegocioDTO.imagenes());
         negocio.setDescripcion(actualizarNegocioDTO.descripcion());
         negocio.setNombre(actualizarNegocioDTO.nombre());
@@ -82,9 +82,9 @@ public class NegocioServicioImpl implements NegocioServicio {
     }
 
     @Override
-    public List<NegocioDTO> listarNegocios() {
+    public List<ItemNegocioDTO> listarNegocios() {
         List<Negocio> negocios =  negocioRepo.findAll();
-        return NegocioUtils.convertirListaNegocioAListaNegocioDto(negocios);
+        return NegocioUtils.convertirListaNegocioAListaItemNegocioDto(negocios);
     }
 
     @Override
@@ -110,12 +110,12 @@ public class NegocioServicioImpl implements NegocioServicio {
     }
 
     @Override
-    public NegocioDTO obtenerNegocioPorNombre(String nombreNegocio) throws ResourceNotFoundException {
-        Optional<Negocio> negocioEncontrado = negocioRepo.findByNombre(nombreNegocio, EstadoNegocio.ACTIVO);
-        if (negocioEncontrado.isEmpty()) {
+    public List<ItemNegocioDTO> obtenerNegocioPorNombre(String nombreNegocio) throws ResourceNotFoundException {
+        List<Negocio>  negociosEncontrado = negocioRepo.findByNombre(nombreNegocio, EstadoNegocio.ACTIVO);
+        if (negociosEncontrado.isEmpty()) {
             throw new ResourceNotFoundException("No se encontró el negocio con nombre: " + nombreNegocio);
         }
-        return NegocioUtils.convertirANegocioDTO(negocioEncontrado.get());
+        return NegocioUtils.convertirListaNegocioAListaItemNegocioDto(negociosEncontrado);
     }
 
     @Override

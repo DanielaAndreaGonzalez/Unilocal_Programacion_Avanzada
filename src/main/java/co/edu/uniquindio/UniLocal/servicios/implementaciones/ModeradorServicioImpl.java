@@ -24,7 +24,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -231,13 +233,20 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     }
 
     private HistorialModeracionDTO convertirAHistoricoDTO(HistorialModeracion historialModeracion) {
+        Negocio negocio = getNogocioById(historialModeracion.getLugarId());
         return new HistorialModeracionDTO(
                 historialModeracion.getLugarId(),
                 historialModeracion.getModeradorId(),
                 historialModeracion.getFechaAccion(),
                 historialModeracion.getEstadoNegocio(),
-                historialModeracion.getObservacion()
+                historialModeracion.getObservacion(),
+                negocio.getNombre(),
+                negocio.getImagenes().get(0)
         );
+    }
+
+    private Negocio getNogocioById(String codigoNegocio){
+        return negocioRepo.findById(codigoNegocio).get();
     }
 
     private Moderador obtenerModeradorPorIdCuenta(String idCuenta)throws ResourceNotFoundException

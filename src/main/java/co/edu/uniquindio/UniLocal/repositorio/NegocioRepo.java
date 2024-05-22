@@ -26,7 +26,7 @@ public interface NegocioRepo extends MongoRepository<Negocio, String> {
     @Aggregation(pipeline = {
             "{ '$match': { 'nombre': ?0, 'estado': ?1 } }"
     })
-    Optional<Negocio> findByNombre(String nombreNegocio, EstadoNegocio estadoNegocio);
+    List<Negocio> findByNombre(String nombreNegocio, EstadoNegocio estadoNegocio);
     @Aggregation(pipeline = {
             "{ '$match': { 'tipoNegocio': ?0, 'estado': ?1 } }"
     })

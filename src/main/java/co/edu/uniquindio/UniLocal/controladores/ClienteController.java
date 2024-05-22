@@ -149,6 +149,10 @@ public class ClienteController {
         }
     }
 
+    public ResponseEntity<MensajeDTO<String>> enviarLinkRecuperacion(@PathVariable String correo)throws Exception{
+        clienteServicio.enviarLinkRecuperacion(correo);
+        return ResponseEntity.ok().body(new MensajeDTO<>(false,"Se ha cambiado su contraseña"));
+    }
 
     @GetMapping("/calcular-promedio-calificaciones/{codigoNegocio}")
     public ResponseEntity<MensajeDTO<Double>> calcularPromedioCalificaciones(@PathVariable String codigoNegocio) {

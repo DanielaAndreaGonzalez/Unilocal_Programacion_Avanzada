@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/negocio")
+@CrossOrigin(origins = "*")
 public class NegocioController {
 
     @Autowired
@@ -40,7 +41,7 @@ public class NegocioController {
     }
 
     @GetMapping("/listar-todos")
-    public ResponseEntity<MensajeDTO<List<NegocioDTO>>> listarNegocios() {
+    public ResponseEntity<MensajeDTO<List<ItemNegocioDTO>>> listarNegocios() {
         return ResponseEntity.ok().body(new MensajeDTO<>(false, negocioServicio.listarNegocios()));
     }
 
@@ -60,7 +61,7 @@ public class NegocioController {
     }
 
     @GetMapping("/obtener-por-nombre/{nombre}")
-    public ResponseEntity<MensajeDTO<NegocioDTO>> obtenerNegocioPorNombre(@PathVariable String nombre) throws Exception {
+    public ResponseEntity<MensajeDTO<List<ItemNegocioDTO>>> obtenerNegocioPorNombre(@PathVariable String nombre) throws Exception {
         return ResponseEntity.ok().body(new MensajeDTO<>(false, negocioServicio.obtenerNegocioPorNombre(nombre)));
     }
 

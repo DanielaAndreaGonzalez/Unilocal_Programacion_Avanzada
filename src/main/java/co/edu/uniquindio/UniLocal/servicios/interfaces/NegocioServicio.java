@@ -2,6 +2,7 @@ package co.edu.uniquindio.UniLocal.servicios.interfaces;
 
 import co.edu.uniquindio.UniLocal.documentos.Negocio;
 import co.edu.uniquindio.UniLocal.dto.ActualizarNegocioDTO;
+import co.edu.uniquindio.UniLocal.dto.ItemNegocioDTO;
 import co.edu.uniquindio.UniLocal.dto.NegocioDTO;
 import co.edu.uniquindio.UniLocal.dto.RegistroNegocioDTO;
 import co.edu.uniquindio.UniLocal.entidades.Ubicacion;
@@ -20,13 +21,13 @@ public interface NegocioServicio{
 
     NegocioDTO obtenerNegocio(String codigo) throws ResourceNotFoundException;
 
-    List<NegocioDTO> listarNegocios();
+    List<ItemNegocioDTO> listarNegocios();
 
     List<NegocioDTO> listarNegociosUsuario(String codigoCliente) throws Exception;
 
     List<NegocioDTO> listarNegociosPorEstado(EstadoNegocio estadoNegocio) throws Exception;
 
-    NegocioDTO obtenerNegocioPorNombre(String nombreNegocio) throws ResourceNotFoundException;
+    List<ItemNegocioDTO> obtenerNegocioPorNombre(String nombreNegocio) throws ResourceNotFoundException;
     List<NegocioDTO> obtenerNegocioPorTipoNegocio(TipoNegocio tipoNegocio) throws ResourceNotFoundException;
     NegocioDTO obtenerNegocioPorUbicacion(Ubicacion ubicacion) throws ResourceNotFoundException;
 

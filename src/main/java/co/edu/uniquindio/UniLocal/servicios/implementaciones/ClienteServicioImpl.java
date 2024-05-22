@@ -158,8 +158,16 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
     @Override
     public void enviarLinkRecuperacion(String email) throws Exception{
+
+        Optional<Cliente> optionalCliente = clienteRepo.findByEmail(email);
+
+        if(optionalCliente.isEmpty()){
+            throw new Exception("No se encontró el cliente con el email"+email);
+        }
+
+        String token = jwtUtils.generarToken(email,null);
         String asunto = "Recuperar contraseña ";
-        String cuerpo = "Hola! has solicitado cambiar tu contraseña, por favor ingresa  a este link  localhost:8080/api/auth/recuperar-contrasena ";
+        String cuerpo = "Hola! has solicitado cambiar tu contraseña, por favor ingresa  a este link  localhost:8080/api/auth/cambiar-password ";
         EmailDTO correoAutorizacion = new EmailDTO(
                 asunto,
                 cuerpo,
