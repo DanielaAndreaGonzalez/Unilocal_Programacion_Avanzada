@@ -16,4 +16,4 @@ RUN ./gradlew build --stacktrace --info
 # Set the port to expose
 EXPOSE ${PORT}
 # Set the entry point to run the application
-ENTRYPOINT ["java", "-jar", "build/libs/unilocal-uq-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "build/libs/UniLocal-proyecto-final-1.0-SNAPSHOT.jar"]
