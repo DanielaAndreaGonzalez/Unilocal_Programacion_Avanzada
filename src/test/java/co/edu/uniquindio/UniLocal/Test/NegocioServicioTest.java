@@ -1,10 +1,7 @@
 package co.edu.uniquindio.UniLocal.Test;
 
 import co.edu.uniquindio.UniLocal.documentos.Negocio;
-import co.edu.uniquindio.UniLocal.dto.ActualizarNegocioDTO;
-import co.edu.uniquindio.UniLocal.dto.NegocioDTO;
-import co.edu.uniquindio.UniLocal.dto.RegistroNegocioDTO;
-import co.edu.uniquindio.UniLocal.dto.RegistroUsuarioDTO;
+import co.edu.uniquindio.UniLocal.dto.*;
 import co.edu.uniquindio.UniLocal.entidades.Horario;
 import co.edu.uniquindio.UniLocal.entidades.Ubicacion;
 import co.edu.uniquindio.UniLocal.enums.EstadoNegocio;
@@ -87,7 +84,7 @@ public class NegocioServicioTest {
     @Test
     public void testListarNegocios()
     {
-        List<NegocioDTO> negocios = negocioServicio.listarNegocios();
+        List<ItemNegocioDTO> negocios = negocioServicio.listarNegocios();
         Assertions.assertEquals(2, negocios.size());
     }
 
