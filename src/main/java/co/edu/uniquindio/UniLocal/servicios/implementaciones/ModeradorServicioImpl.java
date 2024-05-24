@@ -145,7 +145,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
                 negocioEncontrado.get().getCodigo(),
                 autorizarNegocioDTO.moderadorId(),
                 autorizarNegocioDTO.fechaAccion(),
-                EstadoNegocio.APROBADO,
+                EstadoNegocio.ACTIVO,
                 autorizarNegocioDTO.observacion()
         );
         historialModeracionRepo.save(historialModeracion);

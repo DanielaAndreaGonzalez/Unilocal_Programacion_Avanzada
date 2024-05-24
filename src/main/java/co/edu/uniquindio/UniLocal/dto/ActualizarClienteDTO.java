@@ -9,6 +9,7 @@ public record ActualizarClienteDTO (
         //Ejemplo de restriccion numerica
         //@Max(100) @Min(0) int edad
         @NotBlank @Length(max = 100) String nombre,
+        String nickname,
         @NotBlank String fotoPerfil,
         @NotBlank @Email String email,
         @NotBlank String ciudadResidencia
