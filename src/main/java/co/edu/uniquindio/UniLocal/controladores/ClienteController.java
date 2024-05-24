@@ -126,17 +126,6 @@ public class ClienteController {
         }
     }
 
-    @PostMapping("/cambiar-password")
-    public ResponseEntity<MensajeDTO<String>> cambiarPassword(@RequestBody CambioPasswordDTO cambioPasswordDTO)
-    {
-        try {
-            clienteServicio.cambiarPassword(cambioPasswordDTO);
-            return ResponseEntity.ok().body(new MensajeDTO<>(false,"Cambio de contraseña exitoso" ));
-
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error no se pudo cambiar la contraseña"));
-        }
-    }
 
     @PostMapping("/recuperar-password")
     public ResponseEntity<MensajeDTO<String>> recuperarPassword(@RequestBody RecuperacionPasswordDTO recuperacionPasswordDTO)
@@ -149,10 +138,6 @@ public class ClienteController {
         }
     }
 
-    public ResponseEntity<MensajeDTO<String>> enviarLinkRecuperacion(@PathVariable String correo)throws Exception{
-        clienteServicio.enviarLinkRecuperacion(correo);
-        return ResponseEntity.ok().body(new MensajeDTO<>(false,"Se ha cambiado su contraseña"));
-    }
 
     @GetMapping("/calcular-promedio-calificaciones/{codigoNegocio}")
     public ResponseEntity<MensajeDTO<Double>> calcularPromedioCalificaciones(@PathVariable String codigoNegocio) {

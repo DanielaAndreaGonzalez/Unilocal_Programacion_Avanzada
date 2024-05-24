@@ -1,20 +1,14 @@
 package co.edu.uniquindio.UniLocal.controladores;
 
 
-import co.edu.uniquindio.UniLocal.dto.LoginDTO;
-import co.edu.uniquindio.UniLocal.dto.MensajeDTO;
-import co.edu.uniquindio.UniLocal.dto.RegistroUsuarioDTO;
-import co.edu.uniquindio.UniLocal.dto.TokenDTO;
+import co.edu.uniquindio.UniLocal.dto.*;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.AutenticacionServicio;
 import co.edu.uniquindio.UniLocal.servicios.interfaces.ClienteServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -50,6 +44,22 @@ public class AutenticacionController {
         return ResponseEntity.ok().body(new MensajeDTO<>(false, "Cliente registrado correctamente"));
     }
 
+    @GetMapping("/enviar-link-recuperar-pass/{correo}")
+    public ResponseEntity<MensajeDTO<String>> enviarLinkRecuperacion(@PathVariable String correo)throws Exception{
+        clienteServicio.enviarLinkRecuperacion(correo);
+        return ResponseEntity.ok().body(new MensajeDTO<>(false,"Se ha cambiado su contraseña"));
+    }
 
+    @PostMapping("/cambiar-password")
+    public ResponseEntity<MensajeDTO<String>> cambiarPassword(@RequestBody CambioPasswordDTO cambioPasswordDTO)
+    {
+        try {
+            clienteServicio.cambiarPassword(cambioPasswordDTO);
+            return ResponseEntity.ok().body(new MensajeDTO<>(false,"Cambio de contraseña exitoso" ));
+
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new MensajeDTO<>(true, "Error no se pudo cambiar la contraseña"));
+        }
+    }
 
 }

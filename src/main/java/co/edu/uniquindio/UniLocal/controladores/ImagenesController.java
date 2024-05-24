@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/imagenes")
 @RequiredArgsConstructor
 public class ImagenesController {

@@ -167,7 +167,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
         String token = jwtUtils.generarToken(email,null);
         String asunto = "Recuperar contraseña ";
-        String cuerpo = "Hola! has solicitado cambiar tu contraseña, por favor ingresa  a este link  localhost:8080/api/auth/cambiar-password ";
+        String cuerpo = "Hola! has solicitado cambiar tu contraseña, por favor ingresa  a este link  https://unilocal-13f65.web.app/cambiar-contrasena/"+ token;
         EmailDTO correoAutorizacion = new EmailDTO(
                 asunto,
                 cuerpo,
@@ -206,9 +206,9 @@ public class ClienteServicioImpl implements ClienteServicio {
         }
 
         // Verificar que el email extraído del token coincida con el ID (email) del cambioPasswordDTO
-        if (!email.equals(cambioPasswordDTO.codigoCliente())) {
+        /*if (!email.equals(cambioPasswordDTO.codigoCliente())) {
             throw new Exception("El email del token no coincide con la solicitud de cambio de contraseña");
-        }
+        }*/
 
         Optional<Cliente> clienteEncontrado = clienteRepo.findByEmail(email);
         Cliente cliente = clienteEncontrado.orElseThrow(() -> new Exception("Usuario no encontrado"));

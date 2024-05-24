@@ -56,8 +56,10 @@ public class FiltroToken extends OncePerRequestFilter {
                             error = false;
                         }
                     }else{
-                        crearRespuestaError("No tiene permisos para acceder a este recurso",
-                                HttpServletResponse.SC_FORBIDDEN, response);
+
+                            crearRespuestaError("No tiene permisos para acceder a este recurso",
+                                    HttpServletResponse.SC_FORBIDDEN, response);
+
                     }
                 }
                 //Agregar más validaciones para otros roles y recursos(rutas de la API) aquí
@@ -92,7 +94,8 @@ public class FiltroToken extends OncePerRequestFilter {
                     }
                 }
 
-                if (requestURI.startsWith("/api/auth") || requestURI.startsWith("/api/publico")){
+                if (requestURI.startsWith("/api/auth") || requestURI.startsWith("/api/publico") ||
+                        requestURI.startsWith("/api/imagenes")){
                     error = false;
                 }
 
